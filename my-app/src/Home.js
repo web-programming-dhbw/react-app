@@ -1,5 +1,8 @@
 import React from 'react';
 import AddPitchModal from './AddPitchModal.js';
+import Pitch from './Pitch.js';
+import './App.css';
+import { Container, Row, Col } from 'reactstrap';
 
 
 import {
@@ -29,11 +32,12 @@ export default class Example extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
-  render() {
+
+render() {
     return (
       <div>
         <Navbar color="primary" light expand="lg">
-          <NavbarBrand color="light">Welcome to PitchApp</NavbarBrand>
+          <NavbarBrand style={{ color:'white' }} >Welcome to PitchApp</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -41,7 +45,35 @@ export default class Example extends React.Component {
                 <AddPitchModal/>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret style={{ color:'white' }}>
+                  Search Pitches by Area
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>
+                    Production
+                  </DropdownItem>
+                  <DropdownItem>
+                    Customer Relationship and Sales
+                  </DropdownItem>
+                  <DropdownItem>
+                    HR
+                  </DropdownItem>
+                  <DropdownItem>
+                    Procurement
+                  </DropdownItem>
+                  <DropdownItem>
+                    R&D
+                  </DropdownItem>
+                  <DropdownItem>
+                    Finance&Accounting
+                  </DropdownItem>
+                  <DropdownItem>
+                    Other
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret style={{ color:'white' }}>
                   My Account
                 </DropdownToggle>
                 <DropdownMenu right>
@@ -60,6 +92,24 @@ export default class Example extends React.Component {
             </Nav>
           </Collapse>
         </Navbar>
+<Container className="gap">
+  <Row>
+
+    <Col>
+      <Pitch/>
+    </Col>
+
+    <Col>
+      <Pitch/>
+    </Col>
+
+    <Col>
+      <Pitch/>
+    </Col>
+
+  </Row>
+</Container>
+
       </div>
     );
   }

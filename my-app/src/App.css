@@ -21,3 +21,7 @@
   background-image: url("./vectors.png");
   background-size: cover;
 }
+
+.gap {
+ margin-top: 20px;  
+}

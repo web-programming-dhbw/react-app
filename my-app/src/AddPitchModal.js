@@ -40,6 +40,10 @@ class AddPitchModal extends React.Component {
               </Input>
             </FormGroup>
             <FormGroup>
+              <Label for="title">Please add a title</Label>
+              <Input type="textarea" style={{ height: 50 }}name="text" id="title" />
+            </FormGroup>
+            <FormGroup>
               <Label for="description">Please describe your idea</Label>
               <Input type="textarea" style={{ height: 200 }}name="text" id="description" />
             </FormGroup>
