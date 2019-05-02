@@ -59,7 +59,9 @@ render() {
     return (
       <div>
         <Navbar color="primary" light expand="lg">
-          <NavbarBrand style={{ color:'white' }} >Welcome to PitchApp</NavbarBrand>
+        <NavbarBrand href='/home' style={{ color:'white' }} >
+          Welcome to PitchApp
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
