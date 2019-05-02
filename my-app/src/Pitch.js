@@ -8,7 +8,7 @@ export default function Pitch({
   pitch:{id, title, owner, category, desc}
 }){
   return (
-    <Col>
+    <Col xs="6" xm = "4" className="py-2">
     <div>
       
       <Card style={{ color:'midnightBlue', background:'ghostWhite' }} body outline color="primary">
