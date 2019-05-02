@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { Link } from 'react-router-dom';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button} from 'reactstrap';
+import history from './History';
 
 const PITCH_QUERY = gql`
   query PitchQuery($id: Int!) {
@@ -15,7 +16,7 @@ const PITCH_QUERY = gql`
   }
 `;
 
-export class Launch extends Component {
+export class PitchExact extends Component {
   render() {
     let { id } = this.props.match.params;
     id = parseInt(id);
@@ -25,7 +26,7 @@ export class Launch extends Component {
           {({ loading, error, data }) => {
             if (loading) return <h4>Loading...</h4>;
             if (error) console.log(error);
-
+            //console.log(history.go(-1))
             const {
               category,
               desc,
@@ -43,9 +44,7 @@ export class Launch extends Component {
                     <CardText style={{ color:'orange', fontWeight:'bold'}}>
                         {owner}
                     </CardText>
-                    <Link to="/home" className="btn btn-secondary">
-                  Back
-                </Link>
+                <Button onClick={e => {history.go(-1)}} className="btn">Back</Button>
                 </CardBody>
             </Card>
               </div>
@@ -57,4 +56,4 @@ export class Launch extends Component {
   }
 }
 
-export default Launch;
+export default PitchExact;

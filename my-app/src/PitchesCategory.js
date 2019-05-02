@@ -21,19 +21,20 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-  const PITCHES_QUERY = gql`
-  query PitchesQuery {
-    pitch {
-      category
-      id
-      owner
-      title
-      desc
+  const PITCHES_CAT_QUERY = gql`
+    query PitchesCatQuery($category: String!) {
+        pitch(where: {category: {_eq: $category}}) {
+        desc
+        owner
+        title
+        category
+        id
+        }
     }
-  }
 `;
 
-export default class Example extends React.Component {
+
+export default class PitchesCategory extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,13 +43,19 @@ export default class Example extends React.Component {
       isOpen: false
     };
   }
+  componentDidMount() {
+    let { category } = this.props.match.params;
+    history.push(`/pitches/${category}`);
+}
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
   }
+  
 
 render() {
+    let { category } = this.props.match.params;
     return (
       <div>
         <Navbar color="primary" light expand="lg">
@@ -106,30 +113,13 @@ render() {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret style={{ color:'white' }}>
-                  My Account
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    View my Pitches
-                  </DropdownItem>
-                  <DropdownItem>
-                    View my Notis
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem href="/">
-                    Log Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
 <Container className="gap">
 <Fragment>
 <Row>
-        <Query query={PITCHES_QUERY} pollInterval={500}>
+        <Query query={PITCHES_CAT_QUERY} pollInterval={500} variables={{category}}>
           {({ loading, error, data }) => {
             if(data) console.log(data);
             if (loading) return <h4>Loading...</h4>;
