@@ -9,6 +9,7 @@ import  Route from 'react-router-dom/Route';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import history from './History';
+import NavigationBar from './NavigationBar';
 
 const client = new ApolloClient({
   uri: 'http://localhost:8080/v1alpha1/graphql'
@@ -21,6 +22,7 @@ class App extends Component {
     <ApolloProvider client={client}>
       <Router history = {history}>
       <div className="App">
+      <NavigationBar/>
         <Route path="/" exact strict component={Login}
         />
         <Route path="/home" exact strict component={Home}
