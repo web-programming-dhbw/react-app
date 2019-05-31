@@ -1,9 +1,8 @@
 import React from 'react';
+import './App.css';
+
 import AddPitchModal from './AddPitchModal.js';
 import Pitch from './Pitch.js';
-import './App.css';
-import { Container, Row, Col } from 'reactstrap';
-
 
 import {
   Collapse,
@@ -15,7 +14,10 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem,
+  Container,
+  Row,
+  Col } from 'reactstrap';
 
 export default class Example extends React.Component {
   constructor(props) {

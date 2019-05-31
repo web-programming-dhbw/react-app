@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+
 import GDPRModal from './GDPRModal.js';
 import LoginJumbotron from './LoginJumbotron.js';
-import { Button } from 'reactstrap';
-import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { Container, Row, Col } from 'reactstrap';
+
+import { InputGroup, InputGroupAddon, Input, Button, Container, Row, Col } from 'reactstrap';
 
 
 class Login extends Component {
