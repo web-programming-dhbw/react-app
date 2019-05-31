@@ -4,8 +4,8 @@ import './App.css';
 import { BrowserRouter }  from 'react-router-dom';
 import  Route from 'react-router-dom/Route';
 
-import Login from './Login.js';
-import Home from './Home.js';
+import Login from './main/pages/Login.js/index.js.js';
+import Home from './main/pages/Home.js/index.js.js';
 
 class App extends Component {
   render() {
