@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.css';
 
-import AddPitchModal from '../components/AddPitchModal.js/index.js.js';
-import Pitch from '../components/Pitch.js/index.js.js';
+import AddPitchModal from '../components/AddPitchModal.js';
+import Pitch from '../components/Pitch.js';
 
 import {
   Collapse,

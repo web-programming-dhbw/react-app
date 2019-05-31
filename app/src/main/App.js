@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 
 import { BrowserRouter }  from 'react-router-dom';
 import  Route from 'react-router-dom/Route';
 
-import Login from './main/pages/Login.js/index.js.js';
-import Home from './main/pages/Home.js/index.js.js';
+import Login from './pages/Login.js';
+import Home from './pages/Home.js';
 
 class App extends Component {
   render() {
