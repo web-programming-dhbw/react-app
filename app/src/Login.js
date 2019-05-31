@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import GDPRModal from './GDPRModal.js';
-import Home from './Home.js';
 import LoginJumbotron from './LoginJumbotron.js';
 import { Button } from 'reactstrap';
-import { InputGroup, InputGroupAddon, InputGroupText, Input } from 'reactstrap';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { Container, Row, Col } from 'reactstrap';
 
 
