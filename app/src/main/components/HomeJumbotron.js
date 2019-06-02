@@ -1,7 +1,7 @@
 import React from 'react';
 import { Jumbotron, Container } from 'reactstrap';
 
-const LoginJB = (props) => {
+const HomeJumbotron = (props) => {
   return (
     <div>
       <Jumbotron fluid>
@@ -14,4 +14,4 @@ const LoginJB = (props) => {
   );
 };
 
-export default LoginJB;
+export default HomeJumbotron;
