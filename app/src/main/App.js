@@ -1,25 +1,51 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 
-import { BrowserRouter }  from 'react-router-dom';
-import  Route from 'react-router-dom/Route';
+import { BrowserRouter as Router, Route, Redirect }  from 'react-router-dom';
 
-import Login from './pages/Login.js';
+import AppBar from './pages/AppBar.js';
 import Home from './pages/Home.js';
+import Dashboard from './pages/Dashboard.js';
 
-class App extends Component {
+import { Security, ImplicitCallback } from '@okta/okta-react';
+
+const config = {
+  issuer: 'https://dev-509835.okta.com/oauth2/default',
+  redirect_uri: window.location.origin + '/implicit/callback',
+  client_id: '0oao15zo0dc168DZ5356'
+}
+
+export default class App extends Component {
+  state = {
+    authenticated: null,
+    userDetails: {
+      name: "User"
+    }
+  }
+
+  setAuthenticated = (authenticated) => {
+    this.setState({authenticated: authenticated})
+  }
+
+  setUserDetails = (userDetails) => {
+    this.setState({userDetails: userDetails})    
+  }
+
   render() {
     return (
-      <BrowserRouter>
-      <div className="App">
-        <Route path="/" exact strict component={Login}
-        />
-        <Route path="/home" exact strict component={Home}
-        />
-      </div>
-    </BrowserRouter>
+      <div className="App">        
+        <Router>
+          <Security issuer={config.issuer}
+                    client_id={config.client_id}
+                    redirect_uri={config.redirect_uri}
+          >
+            <AppBar setAuthenticated={this.setAuthenticated} setUserDetails={this.setUserDetails} authenticated={this.state.authenticated} />
+            <Route path='/' exact={true} render={(props) => this.state.authenticated ? <Redirect to='/dashboard' /> : <Home />}/>
+            <Route path='/implicit/callback' component={ImplicitCallback}/>
+            <Route path='/dashboard' render={(props) => this.state.authenticated ? <Dashboard {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />}/>
+          </Security>
+      </Router>
+    </div>
     );
   }
 }
-
-export default App;
