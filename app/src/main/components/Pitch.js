@@ -7,7 +7,7 @@ import Resources from './Resources.js';
 const Pitch = (props) => {
   return (
     <div>
-      <Card style={{ color:'midnightBlue', background:'ghostWhite' }} body outline color="primary">
+      <Card style={{ color:'midnightBlue', background:'ghostWhite', marginBottom: "40px" }} body outline color="primary">
         <CardBody>
           <CardTitle style={{ color:'purple', fontWeight:'bold'}} > Idea Title</CardTitle>
           <CardSubtitle style={{ color:'tomato', fontWeight:'bold'}} >Category</CardSubtitle>
