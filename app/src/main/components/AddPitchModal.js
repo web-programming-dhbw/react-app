@@ -20,7 +20,7 @@ class AddPitchModal extends React.Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>Add Pitch</Button>{' '}
+        <Button color="success" onClick={this.toggle}>+ Add Pitch</Button>{' '}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add a new Pitch</ModalHeader>
           <ModalBody>
