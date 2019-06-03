@@ -20,8 +20,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Container,
-  Row,
-  Col
+  Row
 } from 'reactstrap';
 
 const PITCHES_QUERY = gql`
@@ -101,13 +100,20 @@ export default withAuth(class Dashboard extends Component {
                 if (error) console.log(error);
 
                 return (
-                  <Fragment>
+                  <React.Fragment>
 
-                    {data.pitch.map(pitch => (
-                      <Pitch key={pitch.id} pitch={pitch} />
-                    ))}
+                    {() => {
+                      if(!error) {
+                        return data.pitch.map(pitch => (
+                          <Pitch key={pitch.id} pitch={pitch} />
+                        ))
+                      } else {
+                        return <p>{error}</p> 
+                        }
+                      }
+                    }
 
-                  </Fragment>
+                  </React.Fragment>
                 );
               }}
             </Query>
