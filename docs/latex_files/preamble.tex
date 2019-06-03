@@ -1,0 +1,134 @@
+% Hinweis: Optionen der Dokumentenklasse werden an alle folgenden \usepackage{package} Befehle weitergegeben
+\documentclass[fontsize=12pt,paper=a4,parskip=half,twoside=false,numbers=noenddot,bibliography=totoc,listof=totoc,titlepage=true,headsepline=true,footsepline=true]{scrreprt}
+
+
+% Zeichenkodierung Input ist UTF-8: Umlaute können direkt eingegeben werden
+\usepackage[utf8]{inputenc}
+
+% Zeichenkodierung Ausgabe ist T1-Kodierung: Wichtig für die Ausgabe von Umlauten
+\usepackage[T1]{fontenc}
+
+% Schrift festlegen
+\usepackage{lmodern}
+
+% Sprachauswahl für Lokalisierungen und Silbentrennung
+\usepackage[english]{babel}
+
+% Zitate: Anführungszeichen automatisch anhand der Sprache wählen
+\usepackage[babel=true]{csquotes}
+
+% Seitenränder setzen
+\usepackage[left=2cm, right=3.5cm, top=2.5cm, bottom=2cm, headheight=1.25cm, footskip=1.25cm]{geometry}
+
+%mehrere Spalten
+\usepackage{multicol}
+
+% Zeilenabstand auf 1.5 setzen
+\usepackage{setspace}
+\onehalfspacing
+
+% Paket zum Anpassen von Kopf- und Fuss?zeilen
+\usepackage[plainfootsepline, plainheadsepline, headsepline, footsepline, automark]{scrpage2}
+
+% Liniendicke
+\setheadsepline{0.1pt}
+\setfootsepline{0.1pt}
+
+% Kopf- und Fusszeile loeschen
+\clearscrheadfoot
+% Kopf- und Fusszeile aktivieren
+\pagestyle{scrheadings}
+
+% Kopf links
+\ihead[\headmark]{\headmark}
+
+% Fuss rechts
+\ofoot[\pagemark]{\pagemark}
+
+% Seitenzahlen fuer grosse roemische Zahlen
+\newcounter{RomanPagenumber}
+
+%symbols for bibliography
+\usepackage{url}
+\usepackage[backend=bibtex, style=alphabetic, url=true]{biblatex}
+\DeclareNameAlias{author}{last-first}
+\bibliography{bib/literature}
+\usepackage{booktabs}
+\renewcommand{\arraystretch}{1.2}
+
+% Grafiken einbinden
+\usepackage{graphicx}
+\graphicspath{{./fig/}}
+
+%Durchgehende Nummerierung
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+%tabellen
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+
+%Algorithms
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+%Definitionen
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{amsmath,amssymb,amstext}
+\newtheorem{definition}{Definition}%[section]
+\newtheorem{theorem}{Theorem}%[section]
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%custom commands
+\newcommand{\titel}{The Effect of Training Data Correlation on Differentially Private Neural Networks}
+
+%mehere bilder nebeneinander
+\usepackage{subcaption}
+
+% Code listings
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily}
+
+% Links- und PDF-Einstellungen
+\usepackage{hyperref}
+\hypersetup{pdftitle = {\titel},pdfkeywords = {},pdfstartview = {Fit},	colorlinks = {false},breaklinks = {true},bookmarksopen = {true}}
+
+% Verhinderung das Absaetze mit einzeilern beginnen & enden 
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+%title formatierung
+\usepackage{longtable}
+
+%abkuerzungen
+\usepackage{acronym}
+
+%Title
+\renewcommand*{\chapterheadstartvskip}{\vspace*{0.7cm}}
+
+%Umbrueche erlauben
+\allowdisplaybreaks
+
+%eigenes TODO und Comment command
+\usepackage{todonotes}
+
+%PDF import
+\usepackage[final]{pdfpages}
+
+%comment out big tex
+\usepackage{blindtext, xcolor}
+\usepackage{comment}
+
+%picture location settings (avoid floating)
+\usepackage{float}
+
+%appendix
+\usepackage{appendix}
+
+
