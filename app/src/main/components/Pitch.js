@@ -1,12 +1,12 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Col } from 'reactstrap';
 
 import Resources from './Resources.js';
 import { Link } from 'react-router-dom';
 
 
 export default function Pitch({
-  pitch:{id, title, owner, category, desc}
+  pitch: {id, title, owner, category, desc}
 }){
   return (
     <Col xs="6" xm = "4" className="py-2">
