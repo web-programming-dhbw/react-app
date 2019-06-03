@@ -3,6 +3,8 @@ import './styles/App.css';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
+import history from './components/History';
+
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
