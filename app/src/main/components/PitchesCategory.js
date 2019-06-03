@@ -1,25 +1,10 @@
 import React, { Fragment } from 'react';
-import AddPitchModal from './AddPitchModal.js';
 import Pitch from './Pitch.js';
-import './App.css';
-import { Container, Row, Col } from 'reactstrap';
+import '../styles/App.css';
+import { Container, Row } from 'reactstrap';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Link } from 'react-router-dom';
 import history from './History';
-
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
 
   const PITCHES_CAT_QUERY = gql`
     query PitchesCatQuery($category: String!) {
