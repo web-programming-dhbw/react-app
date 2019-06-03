@@ -6,6 +6,8 @@ import Pitch from '../components/Pitch.js';
 import { withAuth } from '@okta/okta-react';
 
 import {
+  NavbarToggler,
+  Collapse,
   Navbar,
   NavbarBrand,
   Nav,
@@ -21,7 +23,12 @@ import {
 
 export default withAuth(class Dashboard extends Component {
   state = {
+    isCollapseOpen: false,
     pitches: [{}, {}, {}, {}, {}, {}]
+  }
+
+  toggleCollapse = () => {
+    this.setState({ isCollapseOpen: !this.state.isCollapseOpen })
   }
 
   getPitches = () => {
@@ -32,49 +39,53 @@ export default withAuth(class Dashboard extends Component {
     let pitchObjects = []
 
     for (let pitch of this.state.pitches) {
-      pitchObjects.push(<Col>
-                          <Pitch />
-                        </Col>)
+      pitchObjects.push(
+        <Col>
+          <Pitch />
+        </Col>
+      )
     }
 
     return pitchObjects
   }
 
   render() {
-      return (
-        <div>
-          <Container className="gap">
-            <Row>
-              <Navbar expand="xs" light style={{ width: "100%" }}>
-                <NavbarBrand>Welcome, {this.props.userDetails["name"]}!</NavbarBrand>
+    return (
+      <div>
+        <Container className="gap">
+          <Row>
+            <Navbar expand="md" light style={{ width: "100%" }}>
+              <NavbarBrand>Welcome, {this.props.userDetails["name"]}!</NavbarBrand>
+              <NavbarToggler onClick={this.toggleCollapse} />
+              <Collapse isOpen={this.state.isCollapseOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
                     <UncontrolledDropdown nav>
                       <DropdownToggle nav caret>
                         Search Pitches by Area
-                    </DropdownToggle>
+                      </DropdownToggle>
                       <DropdownMenu right>
                         <DropdownItem>
                           Production
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           Customer Relationship and Sales
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           HR
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           Procurement
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           R&D
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           Finance&Accounting
-                      </DropdownItem>
+                        </DropdownItem>
                         <DropdownItem>
                           Other
-                      </DropdownItem>
+                        </DropdownItem>
                       </DropdownMenu>
                     </UncontrolledDropdown>
                   </NavItem>
@@ -82,16 +93,17 @@ export default withAuth(class Dashboard extends Component {
                     <AddPitchModal />
                   </NavItem>
                 </Nav>
-              </Navbar>
-            </Row>
-            <Row>
-  
-              {this.displayPitches()}
+              </Collapse>
+            </Navbar>
+          </Row>
+          <Row>
 
-            </Row>
-          </Container>
-  
-        </div>
-      );
+            {this.displayPitches()}
+
+          </Row>
+        </Container>
+
+      </div>
+    );
   }
 })
