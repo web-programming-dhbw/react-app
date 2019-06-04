@@ -1,29 +1,24 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, CardFooter, Row, Col } from 'reactstrap';
 
-import Resources from './Resources.js';
-
+import ShowMore from './ShowMore.js';
 
 const Pitch = (props) => {
   return (
-    <div>
-      <Card style={{ color:'midnightBlue', background:'ghostWhite', marginBottom: "40px" }} body outline color="primary">
+      <Card style={{marginBottom: "40px", height: "350px", overflow: "auto" }}>
         <CardBody>
           <CardTitle style={{ color:'purple', fontWeight:'bold'}} > Idea Title</CardTitle>
-          <CardSubtitle style={{ color:'tomato', fontWeight:'bold'}} >Category</CardSubtitle>
-          <CardText>My idea is... Yield management is a variable pricing strategy, based on understanding, anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed, time-limited resource (such as airline seats or hotel room reservations
-            or advertising inventory). As a specific, inventory-focused branch of revenue management, yield management involves strategic control
-            of inventory to sell the right product to the right customer at the right time for the right price.
+          <CardSubtitle style={{ color:'crimson', fontWeight:'bold'}} >Category</CardSubtitle>
+          <CardText style={{height: "150px", overflow: "auto", textAlign: "justify" }}>SHORT DESCRIPTION My idea is... Yield management is a variable pricing strategy, based on understanding, anticipating and influencing consumer
+            behavior in order to maximize revenue or profits from a fixed.
           </CardText>
-          <Resources/>
-          <CardText style={{ color:'orange', fontWeight:'bold'}}>
-            idea_owner@company_email.com
-          </CardText>
-          <Button color ='success'>Offer Sponsorship</Button>
+          <Row>
+            <Col><ShowMore/></Col>
+            <Col><Button color ='success' size= "sm">Offer Sponsorship</Button></Col>
+          </Row>
         </CardBody>
+      <CardFooter>idea_owner@company_email.com</CardFooter>
       </Card>
-    </div>
   );
 };
 
