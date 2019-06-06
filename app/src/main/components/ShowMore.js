@@ -22,17 +22,23 @@ class ModalExample extends React.Component {
       <div>
         <Button color="primary" size= "sm" onClick={this.toggle}>Show More{this.props.buttonLabel}</Button>{' '}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-        <ModalHeader style={{ color:'purple'}} toggle={this.toggle}><h4>My Idea Title <Badge color="danger">Category</Badge></h4></ModalHeader>
+        <ModalHeader style={{paddingBottom: "6px"}} toggle={this.toggle}><span style={{fontSize: "26px", fontWeight: "bold"}}>Idea Title <Badge color="secondary">Category</Badge></span></ModalHeader>
           <ModalBody>
-          created by idea_owner@company_email.company_email
-          Discription
-          <ListGroup>
-          <ListGroupItem>... </ListGroupItem>
+          <span style={{fontWeight: "bold"}}>Description</span>
+          <ListGroup style={{paddingBottom: "10px", paddingTop: "5px"}}>
+            <ListGroupItem style={{textAlign: "justify"}}>
+              Yield management is a variable pricing strategy, based on understanding, 
+              anticipating and influencing consumer
+              behavior in order to maximize revenue or profits from a fixed.
+            </ListGroupItem>
           </ListGroup>
-          Resources
-          <ListGroup>
+          <span style={{fontWeight: "bold"}}>Resources</span>
+          <ListGroup style={{paddingBottom: "15px", paddingTop: "5px"}}>
           <ListGroupItem>...</ListGroupItem>
           </ListGroup>
+          <span className="text-muted">Created by John Smith [ idea_owner@company_email.com ]</span>
+          <br/>
+          <span className="text-muted">on 2019 June 06 13:16:50</span>
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button>{' '}
