@@ -18,6 +18,7 @@ export class Home extends Component {
                     </ListGroupItem>
                         </ListGroup>
                     </Row>
+                    <Row><br/></Row>
                     <Row>
                         <Col><Button color="secondary">Idea Owners</Button>{' '}
                         </Col>
