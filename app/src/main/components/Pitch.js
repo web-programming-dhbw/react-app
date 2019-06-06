@@ -1,12 +1,12 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, CardFooter, Row, Col } from 'reactstrap';
-
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, CardFooter, Row, Col, Badge} from 'reactstrap';
 import ShowMore from './ShowMore.js';
 
 const Pitch = (props) => {
   return (
-      <Card style={{marginBottom: "40px", height: "350px", overflow: "auto" }}>
+      <Card style={{marginBottom: "40px", height: "370px", overflow: "auto" }}>
         <CardBody style={{paddingBottom: "15px"}}>
+          <Badge color="danger">Matched</Badge>
           <CardTitle style={{marginBottom: "0px", fontSize: "22px", fontWeight: "bold"}}>Idea Title</CardTitle>
           <CardSubtitle style={{marginBottom: "15px"}} className="text-muted">Category</CardSubtitle>
           <CardText style={{marginBottom: "5px", overflow: "auto", height: "150px", textAlign: "justify" }}>

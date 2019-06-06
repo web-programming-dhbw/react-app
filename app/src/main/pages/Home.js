@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import HomeJumbotron from '../components/HomeJumbotron';
 import GDPRModal from '../components/GDPRModal';
-import { Container, Row, Col, Button, ListGroup, ListGroupItem } from 'reactstrap';
+import IdeaOwnersModal from '../components/IdeaOwnersModal';
+import IdeaSponsorsModal from '../components/IdeaSponsorsModal';
+import { Container, Row, Col, ListGroup, ListGroupItem } from 'reactstrap';
 
 export class Home extends Component {
     render() {
@@ -20,11 +22,11 @@ export class Home extends Component {
                     </Row>
                     <Row><br/></Row>
                     <Row>
-                        <Col><Button color="secondary">Idea Owners</Button>{' '}
+                        <Col><IdeaOwnersModal/>
                         </Col>
                         <Col><GDPRModal/>
                         </Col>
-                        <Col><Button color="secondary">Idea Sponsors</Button>{' '}
+                        <Col><IdeaSponsorsModal/>
                         </Col>
                     </Row>                        
                 </Container>

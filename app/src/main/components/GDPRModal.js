@@ -20,28 +20,28 @@ class GDPRModal extends React.Component {
   render() {
     return (
       <div>
-        <Button color="info" onClick={this.toggle}>Privacy policy{this.props.buttonLabel}</Button>{' '}
+        <Button color="info" onClick={this.toggle}>Privacy Policy{this.props.buttonLabel}</Button>{' '}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Our data privacy policy</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Data Privacy Policy of PitchApp</ModalHeader>
           <ModalBody>
   <h5>Data we process when you use PitchApp</h5>
   <br/>
-  •	When you use your PitchApp account, we store information your company give us like your company email address.
+  <p style={{textAlign: "justify" }}>
+  •	When you use your PitchApp account, we store the information that you gave us, e.g. your company email address and your user name.
   <br/>
-  •	When you use PitchApp to do things like add a new pitch, we store the information you create.
+  •	When you use PitchApp to share your ideas by creating a new pitch, we store all the information you enter and the time of your action.</p>
   <br/>
-  •	We collect information about the apps, browsers, and devices you use to access our Services by using different types of technology, possibly including cookies, clear gifs, or web beacons.
+  <h5>Why we process your data</h5>
   <br/>
+  <p style={{textAlign: "justify" }}>We process your data for the purpose of providing our service, which includes:
   <br/>
-  <h5>Why we process it</h5>
+  • providing a platform for sharing your bright ideas with potential project sponsors,
   <br/>
-  We process this data for the purpose of providing our service, including to
+  •	providing a platform for collecting ideas of collegues and increase intrapreneurship in your company,
   <br/>
-  •	Deliver our services and successfully bright ideas with potential project sponsors
+  • protecting you and your ideas against copyright issues, fraud and abuse,
   <br/>
-  •	Improve security by protecting against copyright issues, fraud and abuse
-  <br/>
-  •	Send you messages related to the services PitchApp provides.
+  • and granting you a secure user account.</p>
           </ModalBody>
           <ModalFooter>
             <Button color="success" onClick={this.toggle}>I agree</Button>{' '}
