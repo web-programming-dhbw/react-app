@@ -4,7 +4,7 @@ import ShowMore from './ShowMore.js';
 
 const Pitch = (props) => {
   return (
-      <Card style={{marginBottom: "40px", height: "370px", overflow: "auto" }}>
+      <Card style={{marginBottom: "40px", height: "400px", overflow: "auto" }}>
         <CardBody style={{paddingBottom: "15px"}}>
           <Badge color="danger">Matched</Badge>
           <CardTitle style={{marginBottom: "0px", fontSize: "22px", fontWeight: "bold"}}>Idea Title</CardTitle>
@@ -19,7 +19,9 @@ const Pitch = (props) => {
             <Col><Button color ='success' size= "sm">Offer Sponsorship</Button></Col>
           </Row>
         </CardBody>
-      <CardFooter style={{fontWeight: "bold"}}>idea_owner@company_email.com</CardFooter>
+      <CardFooter style={{fontWeight: "bold"}}>
+        John Smith
+        idea_owner@company_email.com</CardFooter>
       </Card>
   );
 };
