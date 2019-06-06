@@ -38,9 +38,10 @@ export default withAuth(class Dashboard extends Component {
   displayPitches = () => {
     let pitchObjects = []
 
+    let i = 0;
     for (let pitch of this.state.pitches) {
       pitchObjects.push(
-        <Col>
+        <Col key={i++}>
           <Pitch />
         </Col>
       )
