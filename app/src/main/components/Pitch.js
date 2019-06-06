@@ -6,10 +6,12 @@ import ShowMore from './ShowMore.js';
 const Pitch = (props) => {
   return (
       <Card style={{marginBottom: "40px", height: "350px", overflow: "auto" }}>
-        <CardBody>
-          <CardTitle style={{ color:'purple', fontWeight:'bold'}} > Idea Title</CardTitle>
-          <CardSubtitle style={{ color:'crimson', fontWeight:'bold'}} >Category</CardSubtitle>
-          <CardText style={{height: "150px", overflow: "auto", textAlign: "justify" }}>SHORT DESCRIPTION My idea is... Yield management is a variable pricing strategy, based on understanding, anticipating and influencing consumer
+        <CardBody style={{paddingBottom: "15px"}}>
+          <CardTitle style={{marginBottom: "0px", fontSize: "22px", fontWeight: "bold"}}>Idea Title</CardTitle>
+          <CardSubtitle style={{marginBottom: "15px"}} className="text-muted">Category</CardSubtitle>
+          <CardText style={{marginBottom: "5px", overflow: "auto", height: "150px", textAlign: "justify" }}>
+            Yield management is a variable pricing strategy, based on understanding, 
+            anticipating and influencing consumer
             behavior in order to maximize revenue or profits from a fixed.
           </CardText>
           <Row>
@@ -17,7 +19,7 @@ const Pitch = (props) => {
             <Col><Button color ='success' size= "sm">Offer Sponsorship</Button></Col>
           </Row>
         </CardBody>
-      <CardFooter>idea_owner@company_email.com</CardFooter>
+      <CardFooter style={{fontWeight: "bold"}}>idea_owner@company_email.com</CardFooter>
       </Card>
   );
 };
