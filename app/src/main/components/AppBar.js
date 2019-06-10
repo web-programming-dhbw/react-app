@@ -42,7 +42,7 @@ export default withAuth(class AppBar extends Component {
     return (
       <div className="AppBar">
         <Navbar color="primary" expand="xs" light>
-        <Media left href="#">
+        <Media left href={this.props.authenticated ? "/dashboard" : "/"}>
           <Media style ={{width:"52px"}}object src={logo} alt="logo with rocket in a brain" />
         </Media>
           <NavbarBrand style={{ color:'white' }} >PitchApp</NavbarBrand>

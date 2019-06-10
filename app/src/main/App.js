@@ -3,7 +3,7 @@ import './styles/App.css';
 
 import { BrowserRouter as Router, Route, Redirect }  from 'react-router-dom';
 
-import AppBar from './pages/AppBar.js';
+import AppBar from './components/AppBar.js';
 import Home from './pages/Home.js';
 import Dashboard from './pages/Dashboard.js';
 
