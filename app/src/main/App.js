@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard.js';
 
 import { Security, ImplicitCallback } from '@okta/okta-react';
 
+import { CookiesProvider } from 'react-cookie';
+
 const config = {
   issuer: 'https://dev-509835.okta.com/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
@@ -33,7 +35,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">        
+      <div className="App">   
+      <CookiesProvider>
         <Router>
           <Security issuer={config.issuer}
                     client_id={config.client_id}
@@ -44,7 +47,8 @@ export default class App extends Component {
             <Route path='/implicit/callback' component={ImplicitCallback}/>
             <Route path='/dashboard' render={(props) => this.state.authenticated ? <Dashboard {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />}/>
           </Security>
-      </Router>
+        </Router>
+      </CookiesProvider>     
     </div>
     );
   }
