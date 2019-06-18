@@ -50,11 +50,13 @@
 
 %symbols for bibliography
 \usepackage{url}
-\usepackage[backend=bibtex, style=alphabetic, url=true]{biblatex}
+\usepackage[backend=bibtex, style=authoryear, url=true]{biblatex}
 \DeclareNameAlias{author}{last-first}
 \bibliography{bib/literature}
 \usepackage{booktabs}
 \renewcommand{\arraystretch}{1.2}
+
+
 
 % Grafiken einbinden
 \usepackage{graphicx}
@@ -84,8 +86,6 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 
-%custom commands
-\newcommand{\titel}{The Effect of Training Data Correlation on Differentially Private Neural Networks}
 
 %mehere bilder nebeneinander
 \usepackage{subcaption}
@@ -95,8 +95,8 @@
 \lstset{basicstyle=\ttfamily}
 
 % Links- und PDF-Einstellungen
-\usepackage{hyperref}
-\hypersetup{pdftitle = {\titel},pdfkeywords = {},pdfstartview = {Fit},	colorlinks = {false},breaklinks = {true},bookmarksopen = {true}}
+%\usepackage{hyperref}
+%\hypersetup{pdftitle = {\titel},pdfkeywords = {},pdfstartview = {Fit},	colorlinks = {false},breaklinks = {true},bookmarksopen = {true}}
 
 % Verhinderung das Absaetze mit einzeilern beginnen & enden 
 \clubpenalty = 10000
@@ -130,5 +130,16 @@
 
 %appendix
 \usepackage{appendix}
+
+%show author for each chapter
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+	{\parindent0pt\vspace*{-25pt}%
+		\linespread{1.1}\large\scshape#1%
+		\par\nobreak\vspace*{35pt}}
+	\@afterheading%
+}
+\makeatother
 
 

@@ -17,6 +17,8 @@ import PitchesCategory from './components/PitchesCategory';
 
 import { Security, ImplicitCallback } from '@okta/okta-react';
 
+import { CookiesProvider } from 'react-cookie';
+
 const config = {
   issuer: 'https://dev-509835.okta.com/oauth2/default',
   redirect_uri: window.location.origin + '/implicit/callback',
@@ -48,19 +50,21 @@ export default class App extends Component {
       <div className="App">
         <ApolloProvider client={client}>
           <Router history={history}>
-            <Security issuer={config.issuer}
-              client_id={config.client_id}
-              redirect_uri={config.redirect_uri}
-            >
-              <AppBar setAuthenticated={this.setAuthenticated} setUserDetails={this.setUserDetails} authenticated={this.state.authenticated} />
-              <Route path='/' exact={true} render={(props) => this.state.authenticated ? <Redirect to='/dashboard' /> : <Home />} />
-              <Route path='/implicit/callback' component={ImplicitCallback} />
-              
-              <Route path='/dashboard' render={(props) => this.state.authenticated ? <Dashboard {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />} />
+            <CookiesProvider>
+              <Security issuer={config.issuer}
+                client_id={config.client_id}
+                redirect_uri={config.redirect_uri}
+              >
+                <AppBar setAuthenticated={this.setAuthenticated} setUserDetails={this.setUserDetails} authenticated={this.state.authenticated} />
+                <Route path='/' exact={true} render={(props) => this.state.authenticated ? <Redirect to='/dashboard' /> : <Home />} />
+                <Route path='/implicit/callback' component={ImplicitCallback} />
+                
+                <Route path='/dashboard' render={(props) => this.state.authenticated ? <Dashboard {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />} />
 
-              <Route exact path="/pitch/:id" component={PitchExact} />
-              <Route exact path="/pitches/:category" component={PitchesCategory} />
-            </Security>
+                <Route exact path="/pitch/:id" component={PitchExact} />
+                <Route exact path="/pitches/:category" component={PitchesCategory} />
+              </Security>
+            </CookiesProvider>
           </Router>
         </ApolloProvider>
       </div>

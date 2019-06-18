@@ -1,31 +1,29 @@
 import React from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Col } from 'reactstrap';
-
-import Resources from './Resources.js';
-import { Link } from 'react-router-dom';
-
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, CardFooter, Row, Col, Badge} from 'reactstrap';
+import ShowMore from './ShowMore.js';
 
 export default function Pitch({
   pitch: {id, title, owner, category, desc}
 }){
   return (
-    <Col xs="6" xm = "4" className="py-2">
-    <div>
-      <Card style={{ color:'midnightBlue', background:'ghostWhite', marginBottom: "40px" }} body outline color="primary">
-        <CardBody>
-          <CardTitle style={{ color:'purple', fontWeight:'bold'}} > {title}</CardTitle>
-          <CardSubtitle style={{ color:'tomato', fontWeight:'bold'}} >{category}</CardSubtitle>
-          <Resources/>
-          <CardText style={{ color:'orange', fontWeight:'bold'}}>
-            {owner}
+      <Card style={{marginBottom: "40px", height: "400px", overflow: "auto" }}>
+        <CardBody style={{paddingBottom: "15px"}}>
+          <Badge color="danger">Matched</Badge>
+          <CardTitle style={{marginBottom: "0px", fontSize: "22px", fontWeight: "bold"}}>Idea Title</CardTitle>
+          <CardSubtitle style={{marginBottom: "15px"}} className="text-muted">Category</CardSubtitle>
+          <CardText style={{marginBottom: "5px", overflow: "auto", height: "150px", textAlign: "justify" }}>
+            Yield management is a variable pricing strategy, based on understanding, 
+            anticipating and influencing consumer
+            behavior in order to maximize revenue or profits from a fixed.
           </CardText>
-          <Link to={`/pitch/${id}`} className="btn btn-secondary">
-            View Details
-          </Link>
+          <Row>
+            <Col><ShowMore/></Col>
+            <Col><Button color ='success' size= "sm">Offer Sponsorship</Button></Col>
+          </Row>
         </CardBody>
+      <CardFooter style={{fontWeight: "bold"}}>
+        John Smith
+        idea_owner@company_email.com</CardFooter>
       </Card>
-      
-    </div>
-    </Col>
   );
 }
