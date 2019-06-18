@@ -20,7 +20,8 @@ import {
   DropdownMenu,
   DropdownItem,
   Container,
-  Row
+  Row,
+  Col
 } from 'reactstrap';
 
 const PITCHES_QUERY = gql`
@@ -38,6 +39,18 @@ const PITCHES_QUERY = gql`
 export default withAuth(class Dashboard extends Component {
   state = {
     isCollapseOpen: false
+  }
+
+  showPithches = (error, data) => {
+    if(!error) {
+      return data.pitch.map(pitch => (
+        <Col xl={4} xs={6}>
+          <Pitch key={pitch.id} pitch={pitch} />
+        </Col>
+      ))
+    } else {
+      return <p>{error}</p> 
+      }
   }
 
   toggleCollapse = () => {
@@ -101,18 +114,7 @@ export default withAuth(class Dashboard extends Component {
 
                 return (
                   <React.Fragment>
-
-                    {() => {
-                      if(!error) {
-                        return data.pitch.map(pitch => (
-                          <Pitch key={pitch.id} pitch={pitch} />
-                        ))
-                      } else {
-                        return <p>{error}</p> 
-                        }
-                      }
-                    }
-
+                    {this.showPithches(error, data)}
                   </React.Fragment>
                 );
               }}
