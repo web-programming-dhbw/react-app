@@ -49,7 +49,7 @@ export default withAuth(class Dashboard extends Component {
         </Col>
       ))
     } else {
-      return <p>{error}</p> 
+      return <Col><h4>Error loading pitches from the database!</h4></Col>
       }
   }
 
@@ -109,7 +109,7 @@ export default withAuth(class Dashboard extends Component {
             <Query query={PITCHES_QUERY} pollInterval={500}>
               {({ loading, error, data }) => {
                 if (data) console.log(data);
-                if (loading) return <h4>Loading...</h4>;
+                if (loading) return <Col><h4>Loading...</h4></Col>;
                 if (error) console.log(error);
 
                 return (
