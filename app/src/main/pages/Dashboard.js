@@ -5,6 +5,9 @@ import Pitch from '../components/Pitch.js';
 
 import { withAuth } from '@okta/okta-react';
 
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+
 import {
   NavbarToggler,
   Collapse,
@@ -21,33 +24,37 @@ import {
   Col
 } from 'reactstrap';
 
+const PITCHES_QUERY = gql`
+  query PitchesQuery {
+    pitch {
+      category
+      id
+      owner
+      title
+      desc
+    }
+  }
+`;
+
 export default withAuth(class Dashboard extends Component {
   state = {
-    isCollapseOpen: false,
-    pitches: [{}, {}, {}, {}, {}, {}]
+    isCollapseOpen: false
+  }
+
+  showPithches = (error, data) => {
+    if(!error) {
+      return data.pitch.map(pitch => (
+        <Col xl={4} xs={6}>
+          <Pitch key={pitch.id} pitch={pitch} />
+        </Col>
+      ))
+    } else {
+      return <Col><h4>Error loading pitches from the database!</h4></Col>
+      }
   }
 
   toggleCollapse = () => {
     this.setState({ isCollapseOpen: !this.state.isCollapseOpen })
-  }
-
-  getPitches = () => {
-    // Using authToken get pitches for user from Database
-  }
-
-  displayPitches = () => {
-    let pitchObjects = []
-
-    let i = 0;
-    for (let pitch of this.state.pitches) {
-      pitchObjects.push(
-        <Col key={i++}>
-          <Pitch />
-        </Col>
-      )
-    }
-
-    return pitchObjects
   }
 
   render() {
@@ -99,7 +106,19 @@ export default withAuth(class Dashboard extends Component {
           </Row>
           <Row>
 
-            {this.displayPitches()}
+            <Query query={PITCHES_QUERY} pollInterval={500}>
+              {({ loading, error, data }) => {
+                if (data) console.log(data);
+                if (loading) return <Col><h4>Loading...</h4></Col>;
+                if (error) console.log(error);
+
+                return (
+                  <React.Fragment>
+                    {this.showPithches(error, data)}
+                  </React.Fragment>
+                );
+              }}
+            </Query>
 
           </Row>
         </Container>
