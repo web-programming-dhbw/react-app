@@ -4,7 +4,7 @@ import ShowMore from './ShowMore.js';
 
 const Pitch = (props) => {
   return (
-      <Card style={{marginBottom: "40px", height: "400px", overflow: "auto" }}>
+    <Card style={{marginBottom: "40px", height: "400px", overflow: "auto" }}>
         <CardBody style={{paddingBottom: "15px"}}>
           <Badge color="danger">Matched</Badge>
           <CardTitle style={{marginBottom: "0px", fontSize: "22px", fontWeight: "bold"}}>Idea Title</CardTitle>
