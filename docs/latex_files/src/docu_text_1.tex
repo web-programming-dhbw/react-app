@@ -3,13 +3,13 @@
 
 \section{The Value PitchApp Provides for Businesses}
 
-PitchApp is intended to be a platform to help employees find the required organizational support to turn their ideas from inception to reality. The goal of our web application is, thus, to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of the company at which they work. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
+PitchApp is intended to be a platform to help employees find the required organizational support to turn their ideas from inception to reality. The goal of our web-application is, thus, to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of the company at which they work. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
 employee engagement, as well as make big firms more competitive and flexible, thus more
 profitable. Hence, “fast innovators take leadership positions in their industries” \parencite{SH90}.
 
 \section{Characteristics of PitchApp}
 
-PitchApp is a dynamic, single-page web application with database connection that we developed to enhance employee engagement and proactivity by connecting the employees’ ideas to even the highest levels of executives. Managers with budgets and resources for projects (i.e. potential future sponsors) can browse between different project ideas, which are posted by the employees. Distinct types of ideas are sorted into groups like HR, Procurement, R\&D etc., which facilitates searching among them. Then managers can offer their resources for the realization of a project idea, which they find valuable. Employees are also able to view the pitches posted by other colleagues in between their organization to avoid the sharing of redundant ideas. PitchApp is planned to be able to serve more large organizations at the same time and to be provided as a Software as a Service. PitchApp includes a user and session management system, which allows secure login and logout functionalities. It differentiates between public area, i.e. our landing page, and member area with two type of users, idea owners and idea sponsors.
+PitchApp is a dynamic, single-page web-application with database connection that we developed to enhance employee engagement and proactivity by connecting the employees’ ideas to even the highest levels of executives. Managers with budgets and resources for projects (i.e. potential future sponsors) can browse between different project ideas, which are posted by the employees. Distinct types of ideas are sorted into groups like HR, Procurement, R\&D etc., which facilitates searching among them. Then managers can offer their resources for the realization of a project idea, which they find valuable. Employees are also able to view the pitches posted by other colleagues in between their organization to avoid the sharing of redundant ideas. PitchApp is planned to be able to serve more large organizations at the same time and to be provided as a Software as a Service. PitchApp includes a user and session management system, which allows secure login and logout functionalities. It differentiates between public area, i.e. our landing page, and member area with two type of users, idea owners and idea sponsors.
 
 \break
 
@@ -30,7 +30,7 @@ The figure above presents the general characteristics of PitchApp.
 			User management                                                                       & done   & Okta                      \\
 			Session management                                                                    & done   & Okta                      \\
 			Application linked to a database                                                      & done   & PostgreSQL                \\
-			Dynamic content                                                                       & done   & React single-page web app \\
+			Dynamic content                                                                       & done   & React single-page web-app \\
 			Not high complexity, but challenging/latest technologies & done   & See above                 \\ \bottomrule
 		\end{tabular}%
 	}
@@ -43,7 +43,7 @@ The figure above presents the general characteristics of PitchApp.
 
 \section{Client-Server Architecture}
 
-PitchApp implements a classic client-server architecture. More specifically, PitchApp is a web application and has a 3-tier architecture. The three tiers are the user interface, the application server and the database server. In such an architecture, the user interface runs in a web browser like Google Chrome or Mozilla Firefox. The user interface communicates with the application server through HTTP requests and responses, as the application server also implements web server functionalities. The application server itself acts as a client of the database server \parencite[p.~80]{MT17}. The interaction between these two servers can be based on different protocols or database connectivities, like JDBC for JAVA or ODBC for ABAP. In the case of PitchApp, this communication is solved by a Hasura GraphQL Engine, which auto-generates queries as part of the GraphQL schema from our Postgres schema model \parencite{Hasura}. The application server fetches the needed data from the database server, which returns it to the client in its reply. The process described above is shown by the following figure \parencite[p.~80]{MT17}.
+PitchApp implements a classic client-server architecture. More specifically, PitchApp is a web-application and has a 3-tier architecture. The three tiers are the user interface (UI), the application server and the database server. In such an architecture, the UI runs in a web-browser like Google Chrome or Mozilla Firefox. The UI communicates with the application server through HTTP requests and responses, as the application server also implements web-server functionalities. The application server itself acts as a client of the database server \parencite[p.~80]{MT17}. The interaction between these two servers can be based on different protocols or database connectivities, like JDBC for JAVA or ODBC for ABAP. In the case of PitchApp, this communication is solved by a Hasura GraphQL Engine, which auto-generates queries as part of the GraphQL schema from our Postgres schema model \parencite{Hasura}. The application server fetches the needed data from the database server, which returns it to the client in its reply. The process described above is shown by the following figure \parencite[p.~80]{MT17}.
 
 \begin{center}
 \includegraphics{3tiers_gen.png}
@@ -57,13 +57,13 @@ The following figure gives a generalized example on how the tiers interact with 
 	\includegraphics{3tiers_architecture.png}
 \end{center}
 
-Developing a web application was a given requirement and it has several advantages. In comparison to a native application (with 2-tier architecture), the user do not have to install any additional application to its local machine, because the web application runs in a browser. From this also follows, that if in the future we e.g. change the user interface the user do not have to download updates onto his or her local machine. An other benefit of web applications is that they are easier to scale and the different tiers can be scaled separately based on the use case. From the viewpoint of PitchApp this is particularly important, as our application has to be able to serve a large number of users from our customer companies.
+Developing a web-application was a given requirement and it has several advantages. In comparison to a native application (with 2-tier architecture), the user do not have to install any additional application to its local machine, because the web-application runs in a browser. From this also follows, that if in the future we e.g. change the UI, users do not have to download updates onto their local machine. An other benefit of web-applications is that they are easier to scale and the different tiers can be scaled separately based on the use case. From the viewpoint of PitchApp this is particularly important, as our application has to be able to serve a large number of users from our customer companies.
 
 \break
 
 \section{Technologies used for each Tier of PitchApp's Architecture}
 
-We selected state-of-the-art technologies to implement PitchApp. To develop a dynamic single-page web application, React was used. With Reactstrap, we were able to create a responsive and neat-looking user interface. Including an Okta modul to our web-application helped us to provide our users a secure authentication, user- and session management system. Our back-end is a Hasura GraphQL Engine which communicates easily with a PostgreSQL database. The following figure shows the architecture of PitchApp.
+We selected state-of-the-art technologies to implement PitchApp. To develop a dynamic single-page web-application, React was used. With Reactstrap, we were able to create a responsive and neat-looking UI. Including an Okta modul to our web-application helped us to provide our users a secure authentication, user- and session management system. Our back-end is a Hasura GraphQL Engine which communicates easily with a PostgreSQL database. The following figure shows the architecture of PitchApp.
 
 \begin{center}
 	\includegraphics{pitchapp_architecture.png}
@@ -74,15 +74,37 @@ We selected state-of-the-art technologies to implement PitchApp. To develop a dy
 \section{React and Reactstrap}
 \chapterauthor{by Boglarka Lehoczki}
 
-React is a JavaScript library, which is used to create web-based graphical user interfaces \parencite{React}. As the basis of our web-application, a React App was created \parencite{Reactstrap}. The reasons, why we decided to implement PitchApp using React, are based on the general characteristics of React.
+We implemented the client side of our web-application, PitchApp, by using React and Reactstrap, which is built on Bootstrap. The following figure presents the relevant client side technologies.
 
-First, React is declarative. With this library, it is easy to develop interactive web-applications. PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed an simple way to represent states of Pitches, i.e. if a Match occurred to a Pitch. A Match means that an idea sponsor found that a posted idea (Pitch) is worth to be realized.
+\begin{center}
+	\includegraphics{pyramid.jpg}
+\end{center}  
 
-Second, React is component-based. This enabled us to use already implemented components of Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by this.props. Internal state of a component can be accessed similarly with this.state.
+The basis of these web-technologies is the classical web-development trio of Hypertext Markup Language (HTML), Cascading Style Sheets (CSS) and JavaScript (JS). The .html, .css and .js files, which are executed to display the UI on the client side by the web-browser, are delivered by the web-server. HTML is used to describe the content of a web-page. CSS defines the design and layout of this content. JS is commonly used to implement further functionality and to build a dynamic web-page. JS is also called a scripting language, because it determines the way the content of the received web-page is parsed into the Document Object Model (DOM). In this way, the content of the received page can be manipulated. PitchApp was developed to fulfill the requirements of dynamic web-development and, through this, to achieve a higher level of user interactivity.
 
-Finally, React is compatible with Node, which we used on the server side for our back-end implementation.
+To achieve this, we used React, which is a JS library and helps to create web-based graphical UIs \parencite{React}. React works with JSX \parencite{JSX}, which can be described as a syntax extension for JS and combines characteristics of HTML and JS. As the basis of our web-application, a React App was created \parencite{Reactstrap}. The reasons, why we decided to implement PitchApp using React, are based on the general characteristics of React.
 
-Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. For this reason, we decided to use the neat looking design of Reactstrap. We used -inter alia- the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for the landing page design, Media to include our logo and Modals to display additional information to the users.
+With this library, it is easy to develop interactive web-applications. React with JSX, just as JS, is used to access and manipulate the DOM of a web-page or web-application. It is done in the index.html file, where the root from <div id="root"></div> is replaced by all the content of PitchApp, which are to be found in the source folder (src directory) and collected into one component <App/>. In the index.js file, the React DOM is mapped to the root with the following code: ReactDOM.render(<App />, document.getElementById('root'));.
+
+React is declarative and component-based. This means, that the presented UI elements are programmed as a component and can be used and rendered later on to the UI. The following example shows code snippets from Home.js, which is the landing page of PitchApp and HomeJumbotron.js, which is a jumbotron component of PitchApp displayed on the publicly available landing page.
+
+\begin{center}
+	\includegraphics{home_jumbotron.png}
+\end{center} 
+
+\begin{center}
+	\includegraphics{home.png}
+\end{center} 
+
+Instead of designing our own UI elements, which would cost us high effort, we were enabled to use already designed component-templates from Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. Furthermore, PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed a simple way to represent states of Pitches, i.e. if a Match occurred to a Pitch. A Match means that an idea sponsor found that a posted idea (Pitch) is worth to be realized. This problem is also solved component-based. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by the attribute named "this.props". Internal state of a component can be accessed similarly with "this.state". Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. We used - inter alia - the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for the landing page design, Media to include our logo and Modals to display additional information to the users.
+
+React is compatible with Node, which we have also used on the server side for our back-end implementation. In other words, Node.js is a runtime environment for JS, with which React code can be compiled.
+
+React is also secure. By programming in JSX, it is safe to embed user inputs. React DOM escapes values coded in JSX before rendering them and all input is converted to string before rendering \parencite{JSX}. In this way, protection against injection attacks, especially against cross-site-scripting is provided.
+
+Additionally, Bootstrap \parencite{Bootstrap} should be presented, because Reactstrap component-templates are based on Bootstrap 4. The Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, Pitch App follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets, however it was primary designed for office desktop computers and laptops. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes. \todo{code snippet from PitchApp grid and container-row-column}
+
+During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. \todo{example, how this works in the case of pitchapp}
 
 \section{Okta Authentication}
 \chapterauthor{by Ethan Kelly}
