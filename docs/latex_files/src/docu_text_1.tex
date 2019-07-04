@@ -108,6 +108,66 @@ During the design phase of PitchApp, our team decided to construct PitchApp to b
 
 \section{Okta Authentication}
 \chapterauthor{by Ethan Kelly}
+
+The User Management, Authentication \& Authorization along with Session Management for PitchApp is handled using the Okta Identity and Access Management Platform. Okta was chosen on the basis that it is fully OAuth 2.0 compliant, fully scalable and architected for zero downtime. Okta also offer many tools and services to help us with compliance and data security which we will discuss in the coming sections.
+
+\subsection{Identity and Access Management (IAM)}
+
+Identity and Access Management (IAM) are the framework of policies and technologies that ensure the proper people in an enterprise have the appropriate access to technology resources. Identity management can involve 4 basic functions:
+
+\begin{itemize}
+	\item Pure Identity – In all practical models of digital identity, a given identity object consists of a finite set of properties (attribute values). These properties record information about the object. A "pure identity" model is strictly not concerned with the external semantics of these properties.
+	\item User Access - User access enables users to assume a specific digital identity across applications, which enables access controls to be assigned and evaluated against this identity. Access management is normally the motivation for identity management.
+	\item Services - Many products require identity management to properly provide their services as they often require access to extensive information about a user which is subject to privacy and/or confidentiality requirements.
+	\item Identity Federation - Identity federation comprises one or more systems that federate user access and allow users to log in based on authenticating against one of the systems participating in the federation. This trust between several systems is often known as "Circle of Trust". When a user needs to access some service controlled by SP, he/she first authenticates against the IdP and if successful an assertion is sent to the Service Provider.
+\end{itemize}
+
+Along with the capability to create, modify and delete identity data, Identity Management systems control data access and use across systems. To do this the system should have the following capabilities:
+
+\begin{itemize}
+	\item Authentication – Is the verification of if a user is who they say they are
+	\item Authorization – Means managing what operations a user can execute.
+	\item Roles – Roles are groups of operations or other roles which relate to a user’s job/tasks.
+	\item Delegation – Delegation is the ability to allow another user to carry out tasks on your behalf.
+	\item Interchange – The system needs a way of exchanging identity information across systems. The SAML and OpenID Connect protocols are common examples of such methods.
+\end{itemize}
+
+\subsection{The Shared Security Responsibility Model}
+
+Okta makes use of the shared security responsibility model, a model used by many cloud providers including Amazon AWS and Microsoft Azure. This model specifies the distinct responsibilities of us (the customer) and the cloud provider.
+
+\textbf{Okta's Responsibility}
+
+Okta is responsible for the security of the Okta Identity Cloud Platform and its underlying infrastructure. They also provide features to allow us to fulfill our responsibilities.
+
+\textbf{Our Responsibility}
+
+We are responsible for securing our application using the features that Okta offer. This includes granting the correct permissions to users, protecting the right areas of the application and its data to ensure only authorized users see this information.
+
+\begin{center}
+	\includegraphics{okta1.png}
+\end{center}
+
+\subsection{Authentication and Authorization}
+
+\textbf{Authentication}
+
+As mentioned earlier, authentication is the process to verify if a user is who they say they are. Okta handles authentication for PitchApp. When users click Login within PitchApp they are forwarded to our Okta login page. Here users are given the opportunity to enter their login details, or when they are new and wish to register, they can use the provided form to create a user. The user will then receive an email to confirm their email address and registration. After successful registration the user is returned to PitchApp. When Okta redirects the user back to PitchApp it provides an authorization code and a user context that can be used within the app.
+
+\textbf{Authorization}
+
+PitchApp will then use this authorization code along with the required scope to request an access token from Okta. If the user is authorized to use such a scope an access token is returned. This token is then used when the user tries to use a restricted functionality of PitchApp, for example, sponsoring a Pitch. These tokens are also used by PitchApp to ensure users are only able to see information or Pitches, which they are authorized to see.
+Okta works with Role-based Access Control which allows us to provide our customers with an even more personalized experience, while maintaining the upmost level of data security. Okta is also fully OAuth 2.0 compliant, this allows us to easily make use of the Role-based Access Controls, revoke access, and manage the token lifestyle. OAuth 2.0 is the industry standard protocol for authorization. It allows a user to gain limited access to a HTTP service.
+
+\begin{center}
+	\includegraphics{okta2.png}
+\end{center}
+
+\subsection{Session Management}
+
+A web session is a series of HTTP requests and responses created by the same user and session management is the set of rules that governs interactions between websites and its users. Sessions are established at a certain point in time, usually at the time of authentication, and torn down usually at the time of logout or after a timeout. There are 2 forms of session management, cookie-based and URL-rewriting.
+Okta uses a cookie-based authentication mechanism to maintain a user's authentication session across web requests. Session cookies have an expiration configurable by an administrator for the organization and are valid until the cookie expires or the user closes the session (logout) or browser application. A session token is returned after successful authentication which can be later exchanged for a session cookie. Encrypted connections are used for all communications with Okta.
+
 \section{GraphQL Hasura Engine as Server}
 \chapterauthor{by Csaba Kegyes}
 \section{PostgreSQL Database}
