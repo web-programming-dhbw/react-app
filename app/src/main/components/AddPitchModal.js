@@ -84,7 +84,7 @@ class AddPitchModal extends React.Component {
           <ModalFooter>
           <Mutation mutation={POST_MUTATION} variables={{ category: this.state.category,
              owner:this.state.owner, title:this.state.title, desc:this.state.desc}}>
-                {PitchMutation => <button onClick={(event) => {PitchMutation(); this.toggle();}}>Submit</button>}
+                {PitchMutation => <Button color="success" onClick={(event) => {PitchMutation(); this.toggle();}}>Submit</Button>}
           </Mutation>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>

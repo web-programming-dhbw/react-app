@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles/App.css';
 
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { Router, Route, Redirect } from 'react-router-dom';
 
 import history from './components/History';
 

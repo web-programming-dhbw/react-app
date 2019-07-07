@@ -44,9 +44,11 @@ export default withAuth(class Dashboard extends Component {
   showPithches = (error, data) => {
     if(!error) {
       return data.pitch.map(pitch => (
+        <Container>
         <Col xl={4} xs={6}>
           <Pitch key={pitch.id} pitch={pitch} />
         </Col>
+        </Container>
       ))
     } else {
       return <Col><h4>Error loading pitches from the database!</h4></Col>

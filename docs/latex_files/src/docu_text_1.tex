@@ -74,7 +74,7 @@ We selected state-of-the-art technologies to implement PitchApp. To develop a dy
 \section{React and Reactstrap}
 \chapterauthor{by Boglarka Lehoczki}
 
-We implemented the client side of our web-application, PitchApp, by using React and Reactstrap, which is built on Bootstrap. The following figure presents the relevant client side technologies.
+The client side of our web-application, PitchApp, was implemented by using React and Reactstrap, which is built on Bootstrap. The following figure presents how the relevant client side technologies are built on top of each other.
 
 \begin{center}
 	\includegraphics{pyramid.jpg}
@@ -86,7 +86,7 @@ To achieve this, we used React, which is a JS library and helps to create web-ba
 
 With this library, it is easy to develop interactive web-applications. React with JSX, just as JS, is used to access and manipulate the DOM of a web-page or web-application. It is done in the index.html file, where the root from <div id="root"></div> is replaced by all the content of PitchApp, which are to be found in the source folder (src directory) and collected into one component <App/>. In the index.js file, the React DOM is mapped to the root with the following code: ReactDOM.render(<App />, document.getElementById('root'));.
 
-React is declarative and component-based. This means, that the presented UI elements are programmed as a component and can be used and rendered later on to the UI. The following example shows code snippets from Home.js, which is the landing page of PitchApp and HomeJumbotron.js, which is a jumbotron component of PitchApp displayed on the publicly available landing page.
+React is declarative and component-based. This means, that the presented UI elements are programmed as a component and can be used and rendered when needed to the UI. The following example shows code snippets from Home.js, which is the landing page of PitchApp and HomeJumbotron.js, which is a jumbotron component of PitchApp displayed on the publicly available landing page.
 
 \begin{center}
 	\includegraphics{home_jumbotron.png}
@@ -96,15 +96,40 @@ React is declarative and component-based. This means, that the presented UI elem
 	\includegraphics{home.png}
 \end{center} 
 
-Instead of designing our own UI elements, which would cost us high effort, we were enabled to use already designed component-templates from Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. Furthermore, PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed a simple way to represent states of Pitches, i.e. if a Match occurred to a Pitch. A Match means that an idea sponsor found that a posted idea (Pitch) is worth to be realized. This problem is also solved component-based. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by the attribute named "this.props". Internal state of a component can be accessed similarly with "this.state". Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. We used - inter alia - the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for the landing page design, Media to include our logo and Modals to display additional information to the users.
+Instead of designing the appearance of our own UI elements, which would cost us high effort, we were enabled to use already designed component-templates from Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. In this way, we only had to decide how we combine these component-templates to create our own Reactstrap components. Our goal was to represent the users an intuitive UI. Furthermore, PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed a simple way to represent states of Pitches, i.e. if a Match occurred to a Pitch. A Match means that an idea sponsor found that a posted idea (Pitch) is worth to be realized. This problem is also solved component-based. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by the attribute named "this.props". Internal state of a component can be accessed similarly with "this.state". Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. We used - inter alia - the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for an attractive landing page design, Media to include our logo and Modals to display additional information to the users.
 
-React is compatible with Node, which we have also used on the server side for our back-end implementation. In other words, Node.js is a runtime environment for JS, with which React code can be compiled.
+React is compatible with Node, which we have also used on the server side for our back-end implementation. In other words, Node.js is a runtime environment for JS, with which React code can also be compiled.
 
-React is also secure. By programming in JSX, it is safe to embed user inputs. React DOM escapes values coded in JSX before rendering them and all input is converted to string before rendering \parencite{JSX}. In this way, protection against injection attacks, especially against cross-site-scripting is provided.
+An other advantage of React, that it is secure. By programming in JSX, it is safe to embed user inputs. React DOM escapes values coded in JSX before rendering them and all input is converted to string before rendering \parencite{JSX}. In this way, protection against injection attacks, especially against cross-site-scripting, is provided.
 
-Additionally, Bootstrap \parencite{Bootstrap} should be presented, because Reactstrap component-templates are based on Bootstrap 4. The Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, Pitch App follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets, however it was primary designed for office desktop computers and laptops. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes. \todo{code snippet from PitchApp grid and container-row-column}
+Additionally, Bootstrap \parencite{Bootstrap} should be mentioned, because Reactstrap component-templates are based on Bootstrap 4. Using the Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, Pitch App follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes.
+
+The following figures show how a full window-size version and a small window-size version of PitchApp's UI look with the reorganized UI elements.
+
+\begin{center}
+	\includegraphics{pitchapp_big.png}
+\end{center} 
+
+\begin{center}
+	\includegraphics{pitchapp_small.png}
+\end{center} 
 
 During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. \todo{example, how this works in the case of pitchapp}
+
+To sum up, we can state that PitchApp was developed by using React and Reactstrap to be:
+
+\begin{itemize}
+	\item interactive,
+	\item intuitive,
+	\item secure,
+	\item compatible,
+	\item combinable,
+	\item attractive,
+	\item simple,
+	\item single-page,
+	\item responsive and
+	\item dynamic.
+\end{itemize}
 
 \section{Okta Authentication}
 \chapterauthor{by Ethan Kelly}

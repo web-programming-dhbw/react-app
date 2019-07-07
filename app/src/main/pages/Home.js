@@ -13,11 +13,11 @@ export class Home extends Component {
                 <Container>
                     <Row>
                         <ListGroup>
-                            <ListGroupItem>General info about PitchApp:
-                    A világháborúban a szövetségesek és a tengelyhatalmak álltak egymással szemben. Kezdetben javarészt a tengelyhatalmak győzedelmeskedtek a csatákban, majd 1942-ben mind a kelet-európai, mind a csendes-óceáni, mind az afrikai fronton a szövetségesek törtek előre, és végül a tengelyhatalmak teljes vereséget szenvedtek.
-
-                    Az európai, ázsiai és afrikai földrészen vívott harcokban közel hetven nemzet vett részt, ennek következtében több mint 73 millióan vesztették életüket, beleértve a megölt civileket és az elesett katonákat is. A háború kitöréséhez nagyban hozzájárult az első világháború után, a Párizs környéki békeszerződésekkel (versailles-i békeszerződés; trianoni békeszerződés; saint-germaini békeszerződés; sèvres-i békeszerződés) kialakított világpolitikai helyzet.
-                    </ListGroupItem>
+                            <ListGroupItem>
+                            PitchApp is intended to be a platform to help employees find the required organizational support to turn their ideas from inception to reality. The goal of our web-application is, thus, to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of the company at which they work. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
+                            employee engagement, as well as make big firms more competitive and flexible, thus more
+                            profitable. Hence, “fast innovators take leadership positions in their industries”.
+                            </ListGroupItem>
                         </ListGroup>
                     </Row>
                     <Row><br/></Row>
