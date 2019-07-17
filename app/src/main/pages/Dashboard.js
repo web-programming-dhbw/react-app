@@ -21,17 +21,27 @@ import {
   DropdownItem,
   Container,
   Row,
-  Col
+  Col,
+  Spinner
 } from 'reactstrap';
 
+let category = null;
+
 const PITCHES_QUERY = gql`
-  query PitchesQuery {
-    pitch {
-      category
+  query PitchesQuery($category: String!) {
+    pitch(where: {category: {_eq: $category}}) {
       id
+      is_matched
+      matched_timestamp
       owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
       title
       desc
+      creation_timestamp
+      category
     }
   }
 `;
@@ -44,19 +54,21 @@ export default withAuth(class Dashboard extends Component {
   showPithches = (error, data) => {
     if(!error) {
       return data.pitch.map(pitch => (
-        <Container>
         <Col xl={4} xs={6}>
           <Pitch key={pitch.id} pitch={pitch} />
         </Col>
-        </Container>
       ))
     } else {
-      return <Col><h4>Error loading pitches from the database!</h4></Col>
+      return <Col><h4>Cannot connect to the database</h4></Col>
       }
   }
 
   toggleCollapse = () => {
     this.setState({ isCollapseOpen: !this.state.isCollapseOpen })
+  }
+
+  selectCatagory = (event) => {
+    category = event.target.innerText
   }
 
   render() {
@@ -75,7 +87,7 @@ export default withAuth(class Dashboard extends Component {
                         Search Pitches by Area
                       </DropdownToggle>
                       <DropdownMenu right>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           Production
                         </DropdownItem>
                         <DropdownItem>
@@ -108,15 +120,15 @@ export default withAuth(class Dashboard extends Component {
           </Row>
           <Row>
 
-            <Query query={PITCHES_QUERY} pollInterval={500}>
+            <Query query={PITCHES_QUERY} pollInterval={500} variables={{category}}>
               {({ loading, error, data }) => {
                 if (data) console.log(data);
-                if (loading) return <Col><h4>Loading...</h4></Col>;
+                if (loading) return <Col><Spinner color="primary" /></Col>;
                 if (error) console.log(error);
 
                 return (
                   <React.Fragment>
-                    {this.showPithches(error, data)}
+                      {this.showPithches(error, data)}
                   </React.Fragment>
                 );
               }}
