@@ -23,55 +23,39 @@ class ModalExample extends React.Component {
       <div>
         <Button color="primary" size= "sm" onClick={this.toggle}>Show More{this.props.buttonLabel}</Button>{' '}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-        <ModalHeader style={{paddingBottom: "6px"}} toggle={this.toggle}><span style={{fontSize: "26px", fontWeight: "bold"}}>Idea Title <Badge color="danger">Matched</Badge></span></ModalHeader>
+        <ModalHeader style={{paddingBottom: "6px"}} toggle={this.toggle}><span style={{fontSize: "26px", fontWeight: "bold"}}>{this.props.pitch.title}{this.props.pitch.is_matched ? <Badge color="danger">Matched</Badge> : <span/>}</span></ModalHeader>
           <ModalBody>
-          <Alert color="danger">
-          Matched by Karen Klein [ sponsor@company_email.com ]
+          {this.props.pitch.is_matched ? <Alert color="danger">
+          {`Matched by: ${this.props.pitch.sponsor_name} [${this.props.pitch.sponsor_email}]`}
           <br/>
-          on 2019 June 06 22:04:50
-          </Alert>          
+          {`on ${this.props.pitch.matched_timestamp}`}
+    </Alert> : <span/>}          
           <span style={{fontWeight: "bold"}}>Category</span>
           <ListGroup>
             <ListGroupItem style={{textAlign: "justify"}}>
-             Production
+             {this.props.pitch.category}
             </ListGroupItem>
           </ListGroup>
           <span style={{fontWeight: "bold"}}>Description</span>
           <ListGroup style={{paddingBottom: "10px", paddingTop: "5px"}}>
             <ListGroupItem style={{textAlign: "justify"}}>
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.
+            {this.props.pitch.desc}
             </ListGroupItem>
           </ListGroup>
           <span style={{fontWeight: "bold"}}>Resources</span>
           <ListGroup style={{paddingBottom: "15px", paddingTop: "5px"}}>
           <ListGroupItem>
-            Behavior in order to maximize revenue or profits from a fixed.
-            Yield management is a variable pricing strategy, based on understanding, 
-            anticipating and influencing consumer
-            behavior in order to maximize revenue or profits from a fixed.</ListGroupItem>
+          {this.props.pitch.resources}            
+            </ListGroupItem>
           </ListGroup>
           <Alert color="primary">
-          Created by John Smith [ idea_owner@company_email.com ]
+          {`Created by: ${this.props.pitch.owner} [${this.props.pitch.owner_email}]`}
           <br/>
-          on 2019 June 06 13:16:50
+          {`on ${this.props.pitch.creation_timestamp}`}
           </Alert> 
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button>{' '}
+            {true ? <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button> : ""}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
