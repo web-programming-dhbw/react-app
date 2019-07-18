@@ -59,7 +59,7 @@ export default withAuth(class Dashboard extends Component {
         </Col>
       ))
     } else {
-      return <Col><h4>Cannot connect to the database</h4></Col>
+      return <Col><h4>Cannot connect to the database or to public schema</h4></Col>
       }
   }
 
@@ -87,25 +87,29 @@ export default withAuth(class Dashboard extends Component {
                         Search Pitches by Area
                       </DropdownToggle>
                       <DropdownMenu right>
+                      <DropdownItem>
+                          Show All Pitches
+                        </DropdownItem>
+                        <DropdownItem divider />
                         <DropdownItem onClick={this.selectCatagory}>
                           Production
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           Customer Relationship and Sales
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           HR
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           Procurement
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           R&D
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           Finance&Accounting
                         </DropdownItem>
-                        <DropdownItem>
+                        <DropdownItem onClick={this.selectCatagory}>
                           Other
                         </DropdownItem>
                       </DropdownMenu>
