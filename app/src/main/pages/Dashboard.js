@@ -25,11 +25,28 @@ import {
   Spinner
 } from 'reactstrap';
 
-let category = null;
+const FILTER_QUERY = gql`
+  query FilterQuery($category: String!) {
+    pitch(where: {category: {_eq: $category}}) {
+      id
+      is_matched
+      matched_timestamp
+      owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
+      title
+      desc
+      creation_timestamp
+      category
+    }
+  }
+`;
 
 const PITCHES_QUERY = gql`
-  query PitchesQuery($category: String!) {
-    pitch(where: {category: {_eq: $category}}) {
+  query PitchesQuery {
+    pitch {
       id
       is_matched
       matched_timestamp
@@ -48,7 +65,8 @@ const PITCHES_QUERY = gql`
 
 export default withAuth(class Dashboard extends Component {
   state = {
-    isCollapseOpen: false
+    isCollapseOpen: false,
+    category: null
   }
 
   toggleCollapse = () => {
@@ -56,7 +74,7 @@ export default withAuth(class Dashboard extends Component {
   }
 
   selectCatagory = (event) => {
-    category = event.target.innerText
+    this.setState({category:event.target.innerText})
   }
 
   render() {
@@ -75,7 +93,7 @@ export default withAuth(class Dashboard extends Component {
                         Search Pitches by Area
                       </DropdownToggle>
                       <DropdownMenu right>
-                      <DropdownItem>
+                      <DropdownItem onClick={()=> {this.setState({category:null})}}>
                           Show All Pitches
                         </DropdownItem>
                         <DropdownItem divider />
@@ -112,7 +130,7 @@ export default withAuth(class Dashboard extends Component {
           </Row>
           <Row>
 
-            <Query query={PITCHES_QUERY} pollInterval={500} variables={{category}}>
+            <Query query={this.state.category == null ? PITCHES_QUERY: FILTER_QUERY} pollInterval={500} variables={{category: this.state.category}}>
               {({ loading, error, data }) => {
                 if (data) console.log(data);
                 if (loading) return <Col><Spinner color="primary" /></Col>;
