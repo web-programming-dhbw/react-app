@@ -51,18 +51,6 @@ export default withAuth(class Dashboard extends Component {
     isCollapseOpen: false
   }
 
-  showPithches = (error, data) => {
-    if(!error) {
-      return data.pitch.map(pitch => (
-        <Col xl={4} xs={6}>
-          <Pitch key={pitch.id} pitch={pitch} />
-        </Col>
-      ))
-    } else {
-      return <Col><h4>Cannot connect to the database or to public schema</h4></Col>
-      }
-  }
-
   toggleCollapse = () => {
     this.setState({ isCollapseOpen: !this.state.isCollapseOpen })
   }
@@ -128,11 +116,17 @@ export default withAuth(class Dashboard extends Component {
               {({ loading, error, data }) => {
                 if (data) console.log(data);
                 if (loading) return <Col><Spinner color="primary" /></Col>;
-                if (error) console.log(error);
+                if (error) return <Col><h4>Cannot connect to the database or to public schema</h4></Col>;
 
                 return (
                   <React.Fragment>
-                      {this.showPithches(error, data)}
+                      {
+                        data.pitch.map(pitch => (
+                        <Col xl={4} xs={6}>
+                          <Pitch key={pitch.id} pitch={pitch} />
+                        </Col>
+                        ))
+                      }
                   </React.Fragment>
                 );
               }}
