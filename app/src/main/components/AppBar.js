@@ -37,7 +37,7 @@ export default withAuth(class AppBar extends Component {
   }
 
   getUserDetails = () => {
-      this.props.auth.getUser().then((userDetails) => this.props.setUserDetails(userDetails ? userDetails : {name: "User"}))
+      this.props.auth.getUser().then((userDetails) => {console.log(userDetails); this.props.setUserDetails(userDetails ? userDetails : {name: "User"})})
   }
 
   render() {

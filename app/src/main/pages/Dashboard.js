@@ -74,7 +74,7 @@ export default withAuth(class Dashboard extends Component {
   }
 
   selectCatagory = (event) => {
-    this.setState({category:event.target.innerText})
+    this.setState({category: event.target.innerText})
   }
 
   render() {
@@ -129,8 +129,7 @@ export default withAuth(class Dashboard extends Component {
             </Navbar>
           </Row>
           <Row>
-
-            <Query query={this.state.category == null ? PITCHES_QUERY: FILTER_QUERY} pollInterval={500} variables={{category: this.state.category}}>
+            <Query query={this.state.category == null ? PITCHES_QUERY: FILTER_QUERY} pollInterval={500} variables={this.state.category == null ? {} : {category: this.state.category}}>
               {({ loading, error, data }) => {
                 if (data) console.log(data);
                 if (loading) return <Col><Spinner color="primary" /></Col>;
