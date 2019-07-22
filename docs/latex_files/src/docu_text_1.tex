@@ -114,7 +114,7 @@ The following figures show how a full window-size version and a small window-siz
 	\includegraphics{pitchapp_small.png}
 \end{center} 
 
-During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. We used React routing components, like Router, Route, Redirect and History for managing session history, to achieve single-page rendering in PitchApp's App.js. Detailed explanation of different routing components with React can be found on reacttraining.com \parencite{React_router}.
+During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. For example, PitchApp shows all the pitches on its Dashboard and, when a user filters pitches by category, PitchApp does not redirect to an other page, but still displays the selected pitches on its Dashboard. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. We used React routing components, like Router, Route, Redirect and History for managing session history, to achieve single-page rendering in PitchApp's App.js. Detailed explanation of different routing components with React can be found on reacttraining.com \parencite{React_router}.
 
 To sum up, we can state that PitchApp was developed by using React and Reactstrap to be:
 
@@ -177,7 +177,7 @@ We are responsible for securing our application using the features that Okta off
 
 \textbf{Authentication}
 
-As mentioned earlier, authentication is the process to verify if a user is who they say they are. Okta handles authentication for PitchApp. When users click Login within PitchApp they are forwarded to our Okta login page. Here users are given the opportunity to enter their login details, or when they are new and wish to register, they can use the provided form to create a user. The user will then receive an email to confirm their email address and registration. After successful registration the user is returned to PitchApp. When Okta redirects the user back to PitchApp it provides an authorization code and a user context that can be used within the app.
+As mentioned earlier, authentication is the process to verify if a user is who they say they are. Okta handles authentication for PitchApp. When users click Login within PitchApp they are forwarded to our Okta login page. Here users are given the opportunity to enter their login details. When users are registered by their company, they receive an email to confirm their email address. After successful registration the user is returned to PitchApp. When Okta redirects the user back to PitchApp it provides an authorization code and a user context that can be used within the app.
 
 \textbf{Authorization}
 
@@ -209,7 +209,7 @@ In the following, we collected the top difficulties each of our PitchApp team me
 \begin{itemize}
 	\item \textbf{Csaba Kegyes:}
     \item \textbf{Stella Kamakari:}
-	\item \textbf{Ethan Kelly:}
+	\item \textbf{Ethan Kelly:} The hardest part for me was to research the most suitable way to implement the authentication functionality for PitchApp.
 	\item \textbf{Boglarka Lehoczki:} The most difficult part in creating a UI with React was to learn new technologies and instantly use them according to the best practices to enable others to built on the top of my implementation.
 
 \end{itemize}

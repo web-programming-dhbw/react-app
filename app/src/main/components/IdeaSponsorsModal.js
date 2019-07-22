@@ -24,27 +24,20 @@ class IdeaSponsorsModal extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Information for Idea Sponsors</ModalHeader>
           <ModalBody>
-  <h5>Data we process when you use PitchApp</h5>
-  <br/>
-  •	When you use your PitchApp account, we store information your company give us like your company email address.
-  <br/>
-  •	When you use PitchApp to do things like add a new pitch, we store the information you create.
-  <br/>
-  •	We collect information about the apps, browsers, and devices you use to access our Services by using different types of technology, possibly including cookies, clear gifs, or web beacons.
-  <br/>
-  <br/>
-  <h5>Why we process it</h5>
-  <br/>
-  We process this data for the purpose of providing our service, including to
-  <br/>
-  •	Deliver our services and successfully bright ideas with potential project sponsors
-  <br/>
-  •	Improve security by protecting against copyright issues, fraud and abuse
-  <br/>
-  •	Send you messages related to the services PitchApp provides.
+          <h5>Browse between ideas of your colleagues and offer your sponsorship!</h5>
+            <br/>
+            <p style={{textAlign: "justify" }}>
+            Browse between ideas of your colleagues and offer your sponsorship for the best project to make your company even more successful!
+            </p>
+            <br/>
+            <h5>What happens when you offer your sponsorship?</h5>
+            <br/>
+            <p style={{textAlign: "justify" }}>
+            If you offer sponsorship, you offer the listed resources, which are the part of each pitch. When you click on the Offer Sponsorship button, your registered email address is shown to the idea owner of the respective pitch. Now it is his or her turn to contact you and take the next steps.
+            </p>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>{' '}
+            <Button color="success" onClick={this.toggle}>I got it</Button>{' '}
           </ModalFooter>
         </Modal>
       </div>
