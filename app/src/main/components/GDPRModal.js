@@ -44,7 +44,7 @@ class GDPRModal extends React.Component {
   • and granting you a secure user account.</p>
           </ModalBody>
           <ModalFooter>
-            <Button color="success" onClick={this.toggle}>I agree</Button>{' '}
+            <Button color="success" onClick={this.toggle}>I got it</Button>{' '}
           </ModalFooter>
         </Modal>
       </div>

@@ -74,7 +74,7 @@ export default withAuth(class Dashboard extends Component {
   }
 
   selectCatagory = (event) => {
-    this.setState({category:event.target.innerText})
+    this.setState({ category: event.target.innerText })
   }
 
   render() {
@@ -93,7 +93,7 @@ export default withAuth(class Dashboard extends Component {
                         Search Pitches by Area
                       </DropdownToggle>
                       <DropdownMenu right>
-                      <DropdownItem onClick={()=> {this.setState({category:null})}}>
+                        <DropdownItem onClick={() => { this.setState({ category: null }) }}>
                           Show All Pitches
                         </DropdownItem>
                         <DropdownItem divider />
@@ -130,26 +130,26 @@ export default withAuth(class Dashboard extends Component {
           </Row>
           <Row>
 
-            <Query query={this.state.category == null ? PITCHES_QUERY: FILTER_QUERY} pollInterval={500} variables={{category: this.state.category}}>
-              {({ loading, error, data }) => {
-                if (data) console.log(data);
-                if (loading) return <Col><Spinner color="primary" /></Col>;
-                if (error) return <Col><h4>Cannot connect to the database or to public schema</h4></Col>;
+          <Query query={this.state.category == null ? PITCHES_QUERY: FILTER_QUERY} pollInterval={500} variables={this.state.category == null ? {} : {category: this.state.category}}>
+                {({ loading, error, data }) => {
+                  if (data) console.log(data);
+                  if (loading) return <Col><Spinner color="primary" /></Col>;
+                  if (error) console.log(error);
 
-                return (
-                  <React.Fragment>
+                  return (
+                    <React.Fragment>
                       {
                         data.pitch.map(pitch => (
-                        <Col xl={4} xs={6}>
-                          <Pitch key={pitch.id} pitch={pitch} />
-                        </Col>
+                          <Col xl={4} xs={6}>
+                            <Pitch key={pitch.id} pitch={pitch} />
+                          </Col>
                         ))
                       }
-                  </React.Fragment>
-                );
-              }}
-            </Query>
-
+                    </React.Fragment>
+                  );
+                }}
+              </Query>
+          
           </Row>
         </Container>
 
