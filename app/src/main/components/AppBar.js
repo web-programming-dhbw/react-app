@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link }  from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Navbar, NavbarBrand, Button, Nav, NavItem, Media } from 'reactstrap';
 import { withAuth } from '@okta/okta-react';
@@ -37,27 +37,29 @@ export default withAuth(class AppBar extends Component {
   }
 
   getUserDetails = () => {
-      this.props.auth.getUser().then((userDetails) => {console.log(userDetails); this.props.setUserDetails(userDetails ? userDetails : {name: "User"})})
+    this.props.auth.getUser().then((userDetails) => { this.props.setUserDetails(userDetails ? userDetails : { name: "User", groups: [], email: "" }) })
   }
 
   render() {
     return (
       <div className="AppBar">
         <Navbar color="primary" expand="xs" light>
-        <Link to={this.props.authenticated ? "/dashboard" : "/"}>
-          <Media left>
-            <Media style ={{width:"52px"}}object src={logo} alt="logo with rocket in a brain" />
-          </Media>
-        </Link>
-          <NavbarBrand style={{ color:'white' }} >PitchApp</NavbarBrand>
-            <Nav className="ml-auto" navbar>
+          <Link to={this.props.authenticated ? "/dashboard" : "/"}>
+            <Media left>
+              <Media style={{ width: "52px" }} object src={logo} alt="logo with rocket in a brain" />
+            </Media>
+          </Link>
+          <NavbarBrand style={{ color: 'white' }} >PitchApp</NavbarBrand>
+          <Nav className="ml-auto" navbar>
             <NavItem>
-            <Button color="primary">My Pitches</Button>{' '}
-              </NavItem>
-              <NavItem>
-                {this.props.authenticated ? <Button onClick={this.logout} color="danger">Logout</Button> : <Button onClick={this.login} color="success">Login</Button>}
-              </NavItem>
-            </Nav>
+              <Link to="/mypitches">
+                <Button color="primary" onClick={this.props.authenticated ? () => {} : this.login}>My Pitches</Button>{' '}
+              </Link>
+            </NavItem>
+            <NavItem>
+              {this.props.authenticated ? <Button onClick={this.logout} color="danger">Logout</Button> : <Button onClick={this.login} color="success">Login</Button>}
+            </NavItem>
+          </Nav>
         </Navbar>
       </div>
     );

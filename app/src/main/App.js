@@ -18,6 +18,7 @@ import PitchesCategory from './components/PitchesCategory';
 import { Security, ImplicitCallback } from '@okta/okta-react';
 
 import { CookiesProvider } from 'react-cookie';
+import MyPitches from './pages/MyPitches';
 
 const config = {
   issuer: 'https://dev-509835.okta.com/oauth2/default',
@@ -33,7 +34,9 @@ export default class App extends Component {
   state = {
     authenticated: null,
     userDetails: {
-      name: "User"
+      name: "User",
+      email: "",
+      groups: []
     }
   }
 
@@ -60,6 +63,8 @@ export default class App extends Component {
                 <Route path='/implicit/callback' component={ImplicitCallback} />
                 
                 <Route path='/dashboard' render={(props) => this.state.authenticated ? <Dashboard {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />} />
+                <Route path='/mypitches' render={(props) => this.state.authenticated ? <MyPitches {...props} authenticated={this.state.authenticated} userDetails={this.state.userDetails} /> : <Redirect to='/' />} />
+
 
                 <Route exact path="/pitch/:id" component={PitchExact} />
                 <Route exact path="/pitches/:category" component={PitchesCategory} />
