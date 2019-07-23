@@ -63,7 +63,7 @@ export default class Pitch extends Component {
           {this.props.pitch.desc.substring(0, 195) + "..."}
         </CardText>
         <Row>
-          <Col><ShowMore pitch={this.props.pitch} isManager={this.props.isManager} /></Col>
+          <Col><ShowMore pitch={this.props.pitch} isManager={this.props.isManager} userName={this.props.userName} userEmail={this.props.userEmail} /></Col>
 
           <Mutation mutation={MATCH_PITCH}
           variables={{ id: this.props.pitch.id, is_matched: true, matched_timestamp: new Date().toISOString(), sponsor_name: this.props.userName, sponsor_email: this.props.userEmail}}>
