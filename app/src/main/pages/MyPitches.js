@@ -48,11 +48,11 @@ export default withAuth(class MyPitches extends Component {
                 return (
                   <React.Fragment>
                     {
-                      data.pitch.map(pitch => (
+                      data.pitch.length ? data.pitch.map(pitch => (
                         <Col xl={4} xs={6}>
                           <Pitch userEmail={this.props.userDetails.email} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
                         </Col>
-                      ))
+                      )) : <Col><h4>You have no Pitches yet. Add or sponsor a Pitch to get started</h4></Col>
                     }
                   </React.Fragment>
                 );

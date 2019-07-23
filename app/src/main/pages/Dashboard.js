@@ -137,11 +137,11 @@ export default withAuth(class Dashboard extends Component {
                 return (
                   <React.Fragment>
                     {
-                      data.pitch.map(pitch => (
+                      data.pitch.length ? data.pitch.map(pitch => (
                         <Col xl={4} xs={6}>
                           <Pitch userEmail={this.props.userDetails.email} userName={this.props.userDetails.name} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
                         </Col>
-                      ))
+                      )) : <Col><h4>No Pitches have been added yet. Add a Pitch to get started</h4></Col>
                     }
                   </React.Fragment>
                 );
