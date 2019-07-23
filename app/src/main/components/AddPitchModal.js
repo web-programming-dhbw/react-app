@@ -4,11 +4,41 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
+const PITCHES_QUERY = gql`
+  query PitchesQuery {
+    pitch {
+      id
+      is_matched
+      matched_timestamp
+      owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
+      title
+      desc
+      creation_timestamp
+      category
+    }
+  }
+`;
+
 const POST_MUTATION = gql`
-  mutation PitchMutation($category: String!, $owner: String!, $title: String!, $desc: String!)  {
-    insert_pitch(objects: {category: $category, owner: $owner, title: $title, desc: $desc}) {
+  mutation PitchMutation($category: String!, $owner: String!, $title: String!, $desc: String!, $owner_email: String!, $is_matched: Boolean!, $resources: String!, $creation_timestamp: String!)  {
+    insert_pitch(objects: {category: $category, owner: $owner, title: $title, desc: $desc, owner_email: $owner_email, is_matched: $is_matched, resources: $resources, creation_timestamp: $creation_timestamp}) {
       returning {
-        id
+        category
+      creation_timestamp
+      desc
+      id
+      is_matched
+      matched_timestamp
+      owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
+      title
       }
     }
   }
@@ -20,10 +50,10 @@ class AddPitchModal extends React.Component {
     this.state = {
       modal: false,
       title: '',
-      owner:'test_user',
       category:'Production',
       desc:'',
-
+      is_matched: false,
+      resources: ""
     };
 
     this.toggle = this.toggle.bind(this);
@@ -76,14 +106,15 @@ class AddPitchModal extends React.Component {
             </FormGroup>
             <FormGroup>
               <Label for="resources">Please name the resources needed to realize your idea, think about time, people and material</Label>
-              <Input type="textarea" style={{ height: 150 }} name="text" id="resourcest" />
+              <Input type="textarea" onChange={e => this.setState({ resources: e.target.value })} style={{ height: 150 }} name="text" id="resourcest" />
             </FormGroup>
           </Form>
 
           </ModalBody>
           <ModalFooter>
           <Mutation mutation={POST_MUTATION} variables={{ category: this.state.category,
-             owner:this.state.owner, title:this.state.title, desc:this.state.desc}}>
+             owner:this.props.userName, title:this.state.title, desc:this.state.desc, owner_email: this.props.userEmail, is_matched: this.state.is_matched, resources: this.state.resources, creation_timestamp: new Date().toISOString()}}
+             refetchQueries={() => {return [{query: PITCHES_QUERY}]}}>
                 {PitchMutation => <Button color="success" onClick={(event) => {PitchMutation(); this.toggle();}}>Submit</Button>}
           </Mutation>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>

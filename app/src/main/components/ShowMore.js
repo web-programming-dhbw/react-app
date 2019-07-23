@@ -23,10 +23,10 @@ class ModalExample extends React.Component {
       <div>
         <Button color="primary" size="sm" onClick={this.toggle}>Show More{this.props.buttonLabel}</Button>{' '}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader style={{ paddingBottom: "6px" }} toggle={this.toggle}><span style={{ fontSize: "26px", fontWeight: "bold" }}>{this.props.pitch.title}{this.props.pitch.is_matched ? <Badge color="danger">Matched</Badge> : <span />}</span></ModalHeader>
+          <ModalHeader style={{ paddingBottom: "6px" }} toggle={this.toggle}><span style={{ fontSize: "26px", fontWeight: "bold" }}>{this.props.pitch.title}{this.props.pitch.is_matched ? <Badge style={{marginLeft: "15px"}} color="danger">Matched</Badge> : <span />}</span></ModalHeader>
           <ModalBody>
             {this.props.pitch.is_matched ? <Alert color="danger">
-              {`Matched by: ${this.props.pitch.sponsor_name} [${this.props.pitch.sponsor_email}]`}
+              {`Matched by: ${this.props.pitch.sponsor_name} [ ${this.props.pitch.sponsor_email} ]`}
               <br />
               {`on ${this.props.pitch.matched_timestamp}`}
             </Alert> : <span />}
@@ -49,7 +49,7 @@ class ModalExample extends React.Component {
               </ListGroupItem>
             </ListGroup>
             <Alert color="primary">
-              {`Created by: ${this.props.pitch.owner} [${this.props.pitch.owner_email}]`}
+              {`Created by: ${this.props.pitch.owner} [ ${this.props.pitch.owner_email} ]`}
               <br />
               {`on ${this.props.pitch.creation_timestamp}`}
             </Alert>
