@@ -55,7 +55,7 @@ class ModalExample extends React.Component {
             </Alert>
           </ModalBody>
           <ModalFooter>
-            {this.props.isManager ? <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button> : ""}
+            {this.props.isManager && !this.props.pitch.is_matched ? <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button> : ""}
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
