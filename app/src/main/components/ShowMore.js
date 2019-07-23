@@ -1,6 +1,21 @@
 import React from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, ListGroup, ListGroupItem, Badge, Alert } from 'reactstrap';
+import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
 
+const MATCH_PITCH = gql`
+  mutation($id: Int!, $is_matched: Boolean!, $sponsor_name: String!, $sponsor_email: String!, $matched_timestamp: String!) {
+    update_pitch(where: {id: {_eq: $id}}, _set: {is_matched: $is_matched, matched_timestamp: $matched_timestamp, sponsor_email: $sponsor_email, sponsor_name: $sponsor_name}) {
+      returning {
+        id
+        is_matched
+        matched_timestamp
+        sponsor_email
+        sponsor_name
+      }
+    }
+  }
+`;
 
 class ModalExample extends React.Component {
   constructor(props) {
@@ -55,8 +70,13 @@ class ModalExample extends React.Component {
             </Alert>
           </ModalBody>
           <ModalFooter>
-            {this.props.isManager && !this.props.pitch.is_matched ? <Button color="success" onClick={this.toggle}>Offer Sponsorship</Button> : ""}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+
+          <Mutation mutation={MATCH_PITCH}
+          variables={{ id: this.props.pitch.id, is_matched: true, matched_timestamp: new Date().toISOString(), sponsor_name: this.props.userName, sponsor_email: this.props.userEmail}}>
+                {offerSponsorship => this.props.isManager && !this.props.pitch.is_matched ? <Button onClick={offerSponsorship} color='success'>Offer Sponsorship</Button> : <span />}
+          </Mutation>
+
+          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
           </ModalFooter>
         </Modal>
       </div>
