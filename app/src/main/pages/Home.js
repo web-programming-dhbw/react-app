@@ -14,7 +14,7 @@ export class Home extends Component {
                     <Row>
                         <ListGroup>
                             <ListGroupItem>
-                            PitchApp is intended to be a platform to help employees find the required organizational support to turn their ideas from inception to reality. The goal of our web-application is, thus, to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of the company at which they work. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
+                            PitchApp is a platform we developed to help employees find the required organizational support to turn their ideas to reality. The goal of PitchApp is to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of their company. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
                             employee engagement, as well as make big firms more competitive and flexible, thus more
                             profitable. Hence, “fast innovators take leadership positions in their industries”.
                             </ListGroupItem>
