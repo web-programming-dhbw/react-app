@@ -122,7 +122,7 @@ export default withAuth(class Dashboard extends Component {
                     </UncontrolledDropdown>
                   </NavItem>
                   <NavItem>
-                    {this.props.userDetails.groups.includes("Managers") ? <span /> : <AddPitchModal userName={this.props.userDetails.name} userEmail={this.props.userDetails.email} />}
+                    {this.props.userDetails.groups.includes("Employees") ? <AddPitchModal userName={this.props.userDetails.name} userEmail={this.props.userDetails.email} /> : <span />}
                   </NavItem>
                 </Nav>
               </Collapse>
