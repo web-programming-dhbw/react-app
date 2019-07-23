@@ -6,7 +6,7 @@ const HomeJumbotron = (props) => {
     <div>
       <Jumbotron fluid>
         <Container>
-          <h1 className="display-3">PitchApp</h1>
+          <h1 className="display-3">Welcome to PitchApp!</h1>
           <p className="lead">from ideas to projects</p>
         </Container>
       </Jumbotron>
