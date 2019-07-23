@@ -122,7 +122,7 @@ export default withAuth(class Dashboard extends Component {
                     </UncontrolledDropdown>
                   </NavItem>
                   <NavItem>
-                    {this.props.userDetails.groups.includes("Managers") ? <span /> : <AddPitchModal />}
+                    {this.props.userDetails.groups.includes("Managers") ? <span /> : <AddPitchModal userName={this.props.userDetails.name} userEmail={this.props.userDetails.email} />}
                   </NavItem>
                 </Nav>
               </Collapse>
@@ -131,7 +131,6 @@ export default withAuth(class Dashboard extends Component {
           <Row>
             <Query query={this.state.category == null ? PITCHES_QUERY : FILTER_QUERY} pollInterval={500} variables={this.state.category == null ? {} : { category: this.state.category }}>
               {({ loading, error, data }) => {
-                if (data) console.log(data);
                 if (loading) return <Col><Spinner color="primary" /></Col>;
                 if (error) return <Col><h4>Cannot connect to the database or to public schema</h4></Col>;
 
@@ -140,7 +139,7 @@ export default withAuth(class Dashboard extends Component {
                     {
                       data.pitch.map(pitch => (
                         <Col xl={4} xs={6}>
-                          <Pitch userEmail={this.props.userDetails.email} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
+                          <Pitch userEmail={this.props.userDetails.email} userName={this.props.userDetails.name} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
                         </Col>
                       ))
                     }

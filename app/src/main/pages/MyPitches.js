@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import AddPitchModal from '../components/AddPitchModal.js';
 import Pitch from '../components/Pitch.js';
 
 import { withAuth } from '@okta/okta-react';
