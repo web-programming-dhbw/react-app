@@ -1,7 +1,7 @@
-\chapter{Introduction of PitchApp}
+\chapter{Introduction to PitchApp}
 \chapterauthor{by Boglarka Lehoczki}
 
-\section{The Value PitchApp Provides for Businesses}
+\section{Value PitchApp provides for Businesses}
 
 PitchApp is intended to be a platform to help employees find the required organizational support to turn their ideas from inception to reality. The goal of our web-application is, thus, to facilitate the launching of new projects. By making project ideas of colleagues easier and faster visible to management, PitchApp encourages employees to contribute more actively to the success of the company at which they work. In this way, PitchApp helps to achieve higher degrees of intrapreneurship, which leads to business growth. Using our application will bring companies ahead of the game, in terms of innovation and
 employee engagement, as well as make big firms more competitive and flexible, thus more
@@ -51,7 +51,7 @@ PitchApp implements a classic client-server architecture. More specifically, Pit
 
 \break
 
-The following figure gives a generalized example on how the tiers interact with each other when a user wants to see only those pitches, which were created by him or herself. This figure is based on another one from the book Distributed Systems \parencite[p.~61]{MT17}.
+The following figure gives a generalized example on how the tiers interact with each other when an idea owner user wants to see only those pitches, which were created by him or herself or a sponsor user wants to see only those pitches for which he/she offered sponsorship. This figure is based on another one from the book Distributed Systems \parencite[p.~61]{MT17}.
 
 \begin{center}
 	\includegraphics{3tiers_architecture.png}
@@ -96,13 +96,13 @@ React is declarative and component-based. This means, that the presented UI elem
 	\includegraphics{home.png}
 \end{center} 
 
-Instead of designing the appearance of our own UI elements, which would cost us high effort, we were enabled to use already designed component-templates from Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. In this way, we only had to decide how we combine these component-templates to create our own Reactstrap components. Our goal was to represent the users an intuitive UI. Furthermore, PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed a simple way to represent states of Pitches, i.e. if a Match occurred to a Pitch. A Match means that an idea sponsor found that a posted idea (Pitch) is worth to be realized. This problem is also solved component-based. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by the attribute named "this.props". Internal state of a component can be accessed similarly with "this.state". Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. We used - inter alia - the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for an attractive landing page design, Media to include our logo and Modals to display additional information to the users.
+Instead of designing the appearance of our own UI elements, which would cost us high effort, we were enabled to use already designed component-templates from Reactstrap \parencite{Reactstrap_comp}, combine them and - as a result - get a complex, yet neat looking UI design. In this way, we only had to decide how we combine these component-templates to create our own Reactstrap components. Our goal was to display to our users an intuitive UI. Furthermore, PitchApp was developed to be an "idea pool", where ideas of users must be very straightforward to collect and display. We also needed a simple way to represent states of pitches, i.e. if a match occurred to a pitch. A match means that an idea sponsor found that a posted idea (pitch) is worth to be realized. This problem is also solved component-based. Each component manages states internally, which facilitated the handling of different states of UI elements. A render() method is implemented in each of the React components. This method takes input data and returns what to display. Render() can access input data by the attribute named "this.props". Internal state of a component can be accessed similarly with "this.state". Our goal was to build a convenient UI, where employees share their ideas happily and managers can smoothly brows between these. We used - inter alia - the Reactstrap components Badge to indicate a Match, Buttons to enable user interaction by clicking to navigate inside PitchApp, Jumbotron for an attractive landing page design, Media to include our logo and Modals to display additional information to the users.
 
 React is compatible with Node, which we have also used on the server side for our back-end implementation. In other words, Node.js is a runtime environment for JS, with which React code can also be compiled.
 
 An other advantage of React, that it is secure. By programming in JSX, it is safe to embed user inputs. React DOM escapes values coded in JSX before rendering them and all input is converted to string before rendering \parencite{JSX}. In this way, protection against injection attacks, especially against cross-site-scripting, is provided.
 
-Additionally, Bootstrap \parencite{Bootstrap} should be mentioned, because Reactstrap component-templates are based on Bootstrap 4. Using the Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, Pitch App follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes.
+Additionally, Bootstrap \parencite{Bootstrap} should be mentioned, because Reactstrap component-templates are based on Bootstrap 4. Using the Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, PitchApp follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes.
 
 The following figures show how a full window-size version and a small window-size version of PitchApp's UI look with the reorganized UI elements.
 
@@ -114,7 +114,7 @@ The following figures show how a full window-size version and a small window-siz
 	\includegraphics{pitchapp_small.png}
 \end{center} 
 
-During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. For example, PitchApp shows all the pitches on its Dashboard and, when a user filters pitches by category, PitchApp does not redirect to an other page, but still displays the selected pitches on its Dashboard. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. We used React routing components, like Router, Route, Redirect and History for managing session history, to achieve single-page rendering in PitchApp's App.js. Detailed explanation of different routing components with React can be found on reacttraining.com \parencite{React_router}.
+During the design phase of PitchApp, our team decided to construct PitchApp to be a single-page web-application to enhance user experience. A single-page web-application intends to mimic the advantage of a desktop application and to avoid the unnecessary interruption of the user by saving navigation effort and time. The underlying idea is that, instead of loading whole page content repeatedly to the screen, only the changes are rendered. For example, PitchApp shows all the pitches on its Dashboard and, when a user filters pitches by category, PitchApp does not redirect to an other page to only display the selected pitches on its Dashboard. React adopts the principles of developing single-page applications, which was another argument for using React to the development of PitchApp. We used React routing components, like Router, Route, Redirect and History for managing session history, to achieve single-page rendering in PitchApp's App.js. Detailed explanation of different routing components with React can be found on reacttraining.com \parencite{React_router}.
 
 To sum up, we can state that PitchApp was developed by using React and Reactstrap to be:
 
@@ -134,7 +134,7 @@ To sum up, we can state that PitchApp was developed by using React and Reactstra
 \section{Okta Authentication}
 \chapterauthor{by Ethan Kelly}
 
-The User Management, Authentication \& Authorization along with Session Management for PitchApp is handled using the Okta Identity and Access Management Platform. Okta was chosen on the basis that it is fully OAuth 2.0 compliant, fully scalable and architected for zero downtime. Okta also offer many tools and services to help us with compliance and data security which we will discuss in the coming sections.
+The User Management, Authentication \& Authorization along with Session Management for PitchApp is handled using the Okta Identity and Access Management Platform. Okta was chosen on the basis that it is fully OAuth 2.0 compliant, fully scalable and architected for zero downtime. Okta also offer many tools and services to help us with compliance and data security, which we will discuss in the coming sections.
 
 \subsection{Identity and Access Management (IAM)}
 
@@ -181,7 +181,7 @@ As mentioned earlier, authentication is the process to verify if a user is who t
 
 \textbf{Authorization}
 
-PitchApp will then use this authorization code along with the required scope to request an access token from Okta. If the user is authorized to use such a scope an access token is returned. This token is then used when the user tries to use a restricted functionality of PitchApp, for example, sponsoring a Pitch. These tokens are also used by PitchApp to ensure users are only able to see information or Pitches, which they are authorized to see.
+PitchApp will then use this authorization code along with the required scope to request an access token from Okta. If the user is authorized to use such a scope an access token is returned. This token is then used when the user tries to use a restricted functionality of PitchApp, for example, sponsoring a pitch. These tokens are also used by PitchApp to ensure users are only able to see information or pitches, which they are authorized to see.
 Okta works with Role-based Access Control which allows us to provide our customers with an even more personalized experience, while maintaining the upmost level of data security. Okta is also fully OAuth 2.0 compliant, this allows us to easily make use of the Role-based Access Controls, revoke access, and manage the token lifestyle. OAuth 2.0 is the industry standard protocol for authorization. It allows a user to gain limited access to a HTTP service.
 
 \begin{center}
@@ -243,7 +243,7 @@ With this clear separation we could have much more flexibility when deploying fo
 
 In a real-life scenario, containerizing our application would be important because it also allows us to run the applications with popular orchestrators, such as docker swarm or Kubernetes. Providing the safety and automation offered by these technologies is essential for selling a web-service.
 
-For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our React project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed a custom configuration files to handle a single-page web application.
+For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our React project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed custom configuration files to handle a single-page web application.
 
 These three containers are deployed using a docker-compose file that includes configuration for the ports, volumes and other characteristics so that the three components can work together.
 
@@ -253,12 +253,12 @@ npm run build
 
 This creates a build folder in the same directory that can be served by the npm build serve method or by using other servers, such as Nginx.
 
-After the build process was done the PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
+After the build process was done PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
 
 docker build -t "NAME OF IMAGE" .
 
 The name of the image in our case is pitch-docker.
-
+One would build a docker image like this to deploy PitchApp's new functionalities or its modified code. Only to use the application, there is no need to run build commands.
 This image can be used separately, as well as the developer and production builds.
 
 
@@ -268,18 +268,18 @@ This image can be used separately, as well as the developer and production build
 
 \textbf{Public Section}
 
-The public section of PitchApp is comprised of a single web page that guests visit when they want to use the application. This web page presents the main idea behind PitchApp, information for idea owners and idea sponsors, as well as our privacy policy about how PitchApp protects the ownership of ideas. Finally, it includes a button to sign in with Okta or the user can click on the My Pitches button to do the same. Once the user logs in with his or her email address as user name and password, he/she can access the rest of the functionality offered by PitchApp, depending on whether the user is an idea owner or a sponsor.
+The public section of PitchApp is comprised of a single web page that guests visit when they want to use the application. This web page presents the main idea behind PitchApp, information for idea owners and idea sponsors, as well as our privacy policy about how PitchApp protects the ownership of ideas. Finally, it includes a button to sign in with Okta or the user can click on the "My Pitches" button to do the same. Once the user logs in with his or her email address as user name and password, he/she can access the rest of the functionality offered by PitchApp, depending on whether the user is an idea owner or a sponsor.
 
 \textbf{Registered User Area}
 
 The user area for both the idea owner and the idea sponsor have been implemented as planned. The main features for an idea owner are pitch creation, pitch deletion, and showing sponsor information in the event of a match.
-Pitch creation is handled by an appropriate form that enables the user to enter a title for the Pitch, the general area that is pertinent to the Pitch (e.g. HR or Procurement), the Pitch’s description, as well as resources that are required for its completion.
+Pitch creation is handled by an appropriate form that enables the user to enter a title for the pitch, the general area that is pertinent to the pitch (e.g. HR or Procurement), the pitch’s description, as well as resources that are required for its completion.
 Pitch deletion is as easy as clicking on a button and can be performed only by the user who created the pitch. With this, we ensured that none else can delete a pitch except the idea owner him/herself.
 In case of a match, the idea owner can also see the information of the sponsor that matched it. In particular, it shows the name and e-mail address of the sponsor as well as the exact time when the match took place. After that, it is up to the pitch creator to contact the sponsor that matched the pitch.
 
 The main feature of idea sponsors is to view pitches and specific information about them, as well as offer a match to a pitch. When sponsors log in, they view a list of available pitches if these have been previously created by colleagues.
 A sponsor can view the information of a pitch that its owner registered when the pitch was created. A sponsor can then match a pitch, which is as simple as clicking on a button. The pitch creator then receives the information of the sponsor as described above.
-Finally, sponsors can filter pitches based on their general area, so they can focus on the pitches they are more interested in. If they want to return to browse among all pitches again, they can click on Show All Pitches in the Search Pitches by Area dropdown or on the logo on the top left.
+Finally, sponsors can filter pitches based on their general area, so they can focus on the pitches they are more interested in. If they want to return to browse among all pitches again, they can click on "Show All Pitches" in the "Search Pitches by Area" dropdown or on the logo on the top left.
 
 \textbf{User Management}
 
@@ -312,15 +312,40 @@ In particular, when an idea owner submits a pitch, it becomes viewable to all ot
 
 \chapterauthor{by Stella Kamakari}
 
+There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp.
+
+A prerequisite to log into the member area of PitchApp is to get a registration email from Okta and follow the steps included in the email. The responsible contact person from our side in case of any problem with the login or loss of registration email is Ethan Kelly (available at ejk850@gmail.com). He has already provided a superuser account to the email address mail@benedikt-sondermann.de.
+
+For Way 2 and Way 3 the following git repository should be cloned:
+
+https://github.com/web-programming-dhbw/react-app
+
+Way 2 and Way 3 may require some additional download as well.
+Node package manager (npm) may be missing and should be downloaded from:
+
+https://nodejs.org/en/download/
+
+Docker may also have to be downloaded together with Hyper-V from:
+
+https://www.docker.com/products/docker-desktop
+
+and
+
+https://docs.docker.com/machine/drivers/hyper-v/
+
 \section{Way 1 - Accessing the Deployed Version}
 
 We have a working site that can be reached at: https://pitchapp-9f7e5.firebaseapp.com
 
-Also, an instance of the database interface can be reached at https://db-for-pitch.herokuapp.com/console
+Also, an instance of the database interface can be reached at
+
+https://db-for-pitch.herokuapp.com/console
+
+This second link is only shared inside our team and for evaluation purposes.
 
 \section{Way 2 - Running the Local Productive Build}
 
-For PitchApp, the optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before in the respective chapters the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes.
+For PitchApp, an optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before in the respective chapters the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes.
  
 Using the command line the following command should be ran from the folder where our docker-compose.yaml file is located:
 
@@ -332,7 +357,7 @@ This command will automatically download the images and start the application. T
 	\includegraphics{db_table.png}
 \end{center}
 
-After this table is created, one can add the data regarding a pitch to it by the button "Insert row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch. One can only delete a pitch, which was added by him/herself before.
+After this table is created, one can add the data regarding a pitch to it by the button "Insert row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch, which is how the application normally shall be used. Thus, one can only delete a pitch using PitchApp's UI, which was added by him/herself before.
 
 
 \section{Way 3 - Running the Development Mode}
@@ -349,7 +374,7 @@ npm start
 
 It will open PitchApp on localhost:3000. This version does not have a database connection.
 
-In order to connect the development version of PitchApp with the database, a second terminal window should be opened and the database should be started manually with the command:
+In order to connect the development version of PitchApp with the database, a second terminal window should be opened again in the 'app' folder in our repository and the database should be started manually with the command:
 
 docker-compose up
 
@@ -420,7 +445,7 @@ In the following, we collected the top difficulties each of our PitchApp team me
 	\item \textbf{Csaba Kegyes:} One difficulty of implementing our ideas about PitchApp was deciding on which technologies to use. For example we had to balance how easy it is to work with a technology and how well it could perform. It would have been a bit easier to work with Vue.js, among others because it uses HTML instead of JSX. But we saw that other elements that we would like to use are better supported by React and also React could give us a better user experience.
     \item \textbf{Stella Kamakari:} In terms of refactoring, the main challenge was to determine whether best practices have been used, because I had to work with React, while at the same time using the latest version of Javascript.
 	\item \textbf{Ethan Kelly:} The hardest part for me was to research the most suitable way to implement the authentication functionality for PitchApp.
-	\item \textbf{Boglarka Lehoczki:} My part was to create the UI with React. The most difficult was to learn how to use React with JSX, Bootstrap and Reactstrap and instantly use these according to the best practices to enable others to built on the top of my implementation.
+	\item \textbf{Boglarka Lehoczki:} My part was to create the UI with React. The most difficult was to learn React with JSX, Bootstrap and Reactstrap and instantly use these according to the best practices to enable others to built on the top of my implementation.
 
 \end{itemize}
 \chapter{Future Outlook: Missing Components and Functionalities}
@@ -435,8 +460,4 @@ After a pitch owner chooses to filter only the pitches he/she created, it is imp
 
 Another possible improvement would be to add some social features to PitchApp. Currently, users cannot “like”, “dislike”or comment on pitches, which can make it hard for sponsors to find popular pitches. By implementing this feature, we would give the ability to idea owners and sponsors alike to promote the pitches they think are more relevant to the organization.
 
-It would be also a big motivator for employees to share their ideas, if a completely new dashboard would be introduced, where employees can share details about a successful project, which they initiated using PitchApp. This would also help our PitchApp team to collect valuable information on what are the good experiences with PitchApp and what improvements could be made in the future.
-
-
-
-
+It would be also a big motivator for employees to share their ideas, if a completely new, additional area would be introduced, where employees can share the results of successful projects, which they initiated using PitchApp. This would also help our PitchApp team to collect valuable information on what are the good experiences with PitchApp and what improvements could be made in the future.
