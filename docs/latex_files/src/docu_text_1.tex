@@ -193,14 +193,17 @@ Okta works with Role-based Access Control which allows us to provide our custome
 A web session is a series of HTTP requests and responses created by the same user and session management is the set of rules that governs interactions between websites and its users. Sessions are established at a certain point in time, usually at the time of authentication, and torn down usually at the time of logout or after a timeout. There are 2 forms of session management, cookie-based and URL-rewriting.
 Okta uses a cookie-based authentication mechanism to maintain a user's authentication session across web requests. Session cookies have an expiration configurable by an administrator for the organization and are valid until the cookie expires or the user closes the session (logout) or browser application. A session token is returned after successful authentication which can be later exchanged for a session cookie. Encrypted connections are used for all communications with Okta.
 
+\pagebreak
+
 \section{GraphQL Hasura Engine as Server}
+
 \chapterauthor{by Csaba Kegyes}
 
 \textbf{GraphQL}
 
 GraphQL is a query language that provides a technology for having a unified interface for a variety of database systems. For example, it will allow a user to use SQL and MongoDB databases, together. A GraphQL server is usable by common REST calls. 
-One of the reasons why we decided to use GraphQLis that it integrates quite well to REACT through Apollo. This could be due to the fact that both technologies are developed by Facebook. This integration meant that we did not need to develop our own API for a database, defining both the end-points and the queries themselves. For example, by using MongoDB we would have had to host the database itself and a server that is running a MongoDB driver. Accessing the database directly through REST calls is possible but highly insecure.
-The GraphQL client in our REACT application also provides us with more ease of use for development. For instance, the GraphQL client can redo queries on select intervals or when it detects changes; this functionality is built into the client natively, so we didn’t have to use sleep methods or loops for this purpose.
+One of the reasons why we decided to use GraphQLis that it integrates quite well to React through Apollo. This could be due to the fact that both technologies are developed by Facebook. This integration meant that we did not need to develop our own API for a database, defining both the end-points and the queries themselves. For example, by using MongoDB we would have had to host the database itself and a server that is running a MongoDB driver. Accessing the database directly through REST calls is possible but highly insecure.
+The GraphQL client in our React application also provides us with more ease of use for development. For instance, the GraphQL client can redo queries on select intervals or when it detects changes; this functionality is built into the client natively, so we didn’t have to use sleep methods or loops for this purpose.
 One downside of using GraphQL is that defining the queries is a long process that cannot be changed during run-time. Besides the queries, type definitions, resolvers also have to be defined. This means that a query doesn’t have to be edited in one file in a centralized manner but in at least three.
 
 \textbf{HasuraGraphQL Engine}
@@ -211,6 +214,7 @@ Hasura also provides us with Docker files and docker images that we could use fo
 
 
 \section{PostgreSQL Database}
+
 \chapterauthor{by Csaba Kegyes}
 
 PostgreSQL is an open source object-relational database which highlights extensibility and serves a variety of technical standards. We chose to use Postgres because its integration with the HasuraGraphQL engine. Hasura uses it by default and because its availability as an official docker image we can also run it in a containerized way. 
@@ -223,35 +227,188 @@ Our pitch table in our Postgres database is constructed the following way:
 \end{center}
 
 \section{Docker}
+
 \chapterauthor{by Csaba Kegyes}
 
 Docker is an open source tool that uses containers in order to assist both developers and system administrators to create, implement and run applications. Through the containers the application can be shipped in one package along with all its components such as code, libraries, tools etc.
 We decided to use Docker in order to have a clearer separation of reusable components, similar to a micro-service oriented design. With Docker we can get some components that are provided by the developers themselves, like in the case of Hasura and Postgres but we can also make our own one for the React front-end application. 
 With this clear separation we could have much more flexibility when deploying for ourselves or for a potential customer. The components, the front-end, HasuraGraphQL engine, Postgres database, do not have to be on the same server, or hosted on a service that is offered by one provider. For example, the instance that we have provided already uses Heroku for hosting the database and the GraphQL server, while we used Firebase, which supports single-page web applications, to host our front-end.
 In a real-life scenario, containerizing our application would be important because it also allows us to run the applications with popular orchestrators, such as docker swarm or Kubernetes. Providing the safety and automation offered by these technologies is essential for selling a web-service.
-For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our react project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed a custom configuration files to handle a single-page web application.
+For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our React project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed a custom configuration files to handle a single-page web application.
 These three containers are deployed using a docker-compose file that includes configuration for the ports, volumes and other characteristics so that the three components can work together.
 
 
 \chapter{Final Results}
+
 \chapterauthor{by Stella Kamakari}
 
+\textbf{Public Section}
 
+The public section of PitchApp is comprised of a single web page that guests visit when they want to use the application. This web page presents the main idea behind PitchApp, information for idea owners and idea sponsors, as well as our privacy policy about how PitchApp protects the ownership of ideas. Finally, it includes a button to sign in with Okta or the user can click on the My Pitches button to do the same. Once the user logs in with his or her email address as user name and password, he/she can access the rest of the functionality offered by PitchApp, depending on whether the user is an idea owner or a sponsor.
 
-\chapter{User Manual}
+\textbf{Registered User Area}
+
+The user area for both the idea owner and the idea sponsor have been implemented as planned. The main features for an idea owner are pitch creation, pitch deletion, and showing sponsor information in the event of a match.
+Pitch creation is handled by an appropriate form that enables the user to enter a title for the Pitch, the general area that is pertinent to the Pitch (e.g. HR or Procurement), the Pitch’s description, as well as resources that are required for its completion.
+Pitch deletion is as easy as clicking on a button and can be performed only by the user who created the pitch. With this, we ensured that none else can delete a pitch except the idea owner him/herself.
+In case of a match, the idea owner can also see the information of the sponsor that matched it. In particular, it shows the name and e-mail address of the sponsor as well as the exact time when the match took place. After that, it is up to the pitch creator to contact the sponsor that matched the pitch.
+
+The main feature of idea sponsors is to view pitches and specific information about them, as well as offer a match to a pitch. When sponsors log in, they view a list of available pitches if these have been previously created by colleagues.
+A sponsor can view the information of a pitch that its owner registered when the pitch was created. A sponsor can then match a pitch, which is as simple as clicking on a button. The pitch creator then receives the information of the sponsor as described above.
+Finally, sponsors can filter pitches based on their general area, so they can focus on the pitches they are more interested in. If they want to return to browse among all pitches again, they can click on Show All Pitches in the Search Pitches by Area dropdown or on the logo on the top left.
+
+\textbf{User Management}
+
+In PitchApp, user management is done by using services offered by the Okta Identity and Access Management Platform. These services include:
+
+\begin{itemize}
+	\item User account creation using Okta registration form, with features such as email address confirmation,
+	\item login to user account and logout,
+	\item role-based access control, which allows the implementation of different user types, i.e. idea owner, idea sponsor and
+	\item cookie-based authentication for session management.
+\end{itemize}
+
+It is worth to mention that all network communication with Okta’s services uses encryption.
+
+Users from companies receive an email from Okta, where they follow the steps of registration by e.g. setting their password. These registration emails are generated on demand of the companies by our team. In this way, companies can define how many and exactly for which co-workers they want to provide access to the application.
+
+To demonstrate the full capabilities of PitchApp and test its functionalities, we created a third user type - a super user - which has the rights of both sponsors and idea owners. This kind of user was provided in order to evaluate and note PitchApp.
+
+\textbf{Linked to a Database}
+
+The functionality of PitchApp is based on database access. The database chosen for PitchApp was PostgreSQL, an open source object-relational database. The motivation for choosing PostgreSQL includes the following reasons.
+First, PostgreSQL integrates with the Hasura GraphQL engine, another technology that simplifies database access. Second, PostgreSQL made it possible to use docker images easier as well, which enabled for simpler deployment of PitchApp. Finally, PostgreSQL was selected because our development team was already familiar with relational databases, as opposed to document-based databases such as MongoDB.
+
+\textbf{Dynamic Content}
+
+PitchApp is a dynamic application. Information is updated in various areas of the application appropriately. The users, be it idea owners or idea sponsors, view updated information at all times.
+In particular, when an idea owner submits a pitch, it becomes viewable to all other owners and idea sponsors. Furthermore, any sponsor has the possibility to offer a match to a pitch. When that happens, the information of the sponsor as well as when the match happened appear on that pitch (which can be viewed by the creator and the other registered users).
+
+\chapter{User Manual - Development Insight into Running PitchApp}
+
 \chapterauthor{by Stella Kamakari}
+
+\subsection{Running PitchApp}
+
+For PitchApp, the optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes. 
+Using the command line the following command should be ran from the folder where our docker-compose.yaml file is located:
+
+docker-compose up
+
+This command will automatically download the images and start the application. The front-end can be reached at localhost:8000. When trying this method, the table, that we have described in the section detailing Postgres, has to be created for the application to work. This can be done in the Hasura interface that can be reached at localhost:8080.
+
+We also have a working site that can be reached at: URL. Also, an instance of the database interface can be reached at URL. \todo{add urls}
+
+In order to run the react front-end, navigate to the 'app' folder in our repository. First the dependencies should be installed. This can be done by the following command:
+
+npm install
+
+After this is done the application can be run in developer mode by running the next command:
+
+npm start
+
+It will open localhost:3000 with PitchApp.
+
+Our React app can also be put into production ready mode by running the following command:
+
+npm run build
+
+This creates a build folder in the same directory that can be served by the build serve method or by using other servers, such as Nginx.
+
+After the build process is done the React application can be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. Run the following command in the command line:
+
+docker build -t "NAME OF IMAGE" .
+
+The name of the image in our case is pitch-docker.
+
+This image can be used separately, as well as the developer and production builds, but they will be missing the database connection.
+During development we started the database connection from one terminal with
+docker-compose up
+and from another terminal we opened the development view of PitchApp with
+
+npm start
+
+\subsection{Implemented Features}
+
+\textbf{Public Section}
+
+Through the public section, a user can perform the following actions:
+
+\begin{itemize}
+
+\item To view information about idea owners, the user must press the button “Idea Owners”.
+\item Likewise, users can see information about idea sponsors by pressing the button “Idea Sponsors”.
+\item The privacy policy of PitchApp is accessible by clicking on the corresponding button.
+\item To login, the user can click on the “Login” button. The same thing happens when the user clicks on the button “My Pitches” as well.
+
+\end{itemize}
+
+\textbf{Login Section}
+
+The user can sign-in by entering the username and password, and hitting the button “Sign in”.
+The user can also make sure that this information is remembered by the browser, so it does not have to be entered every time, by clicking on the checkbox “Remember me”.
+In case the user has forgotten the password, he/she can get help by clicking on the link “Forgot password?”
+If the user requires more help with respect to signing in, he/she can click on the button “Help”, which links to Okta’s page with related information.
+These services are provided by Okta and are features included in PitchApp “as-is”. They were not implemented again by the PitchApp team.
+The user can sign up for a new account by hitting the button “Sign up”, which leads to a new form. There, the user must fill in the required fields “Email”, “Password”, “First name” and “Last name” and hit the button “Register”.
+New account cannot be created without approval by an administrator (Ethan Kelly is responsible for the approval of new accounts and the types of user accounts, e.g. idea sponsor).
+
+
+\textbf{User Area Section for Idea Owner}
+
+An idea owner can create a new pitch by pressing the button “Add Pitch”, which opens up a new form to fill in the information pertinent to the new pitch. There are fields corresponding to each piece of information the user can enter, including:
+
+\begin{itemize}
+\item the title of the pitch,
+\item the description of the pitch,
+\item the resources required for the implementation of the idea, which a potential sponsor would have to agree provide and
+\item there is also a drop-down menu for selecting the category of the pitch, e.g. HR or Production.
+\end{itemize}
+
+The user can publish the pitch by clicking on the button “Submit”. In this case, the user is returned to the landing area, where the new pitch becomes visible.
+If the user wants to cancel the creation of the pitch, he/she can press the button “Cancel” instead, which will return him/her to the landing area.
+Once a pitch has been created, the owner of the pitch can view the information of the pitch by pressing the blue “Show More” button that appears inside the box of the pitch.
+The creator of a pitch may also delete it by pressing the red “Delete Pitch” button that also appears inside the pitch’s card.
+Once a pitch has been matched by a sponsor, the owner of the pitch can see this information, along with the information of the sponsor who matched it (name and e-mail), as well as when the match occurred, inside the box of the pitch.
+
+
+\textbf{User Area Section for Idea Sponsor}
+
+The landing page of the idea sponsor includes a list of all the pitches that have been published already.
+The user can filter through the published pitches by clicking on the button “Search Pitches by Area” and then selecting an area of interest from the drop-down menu that appears. This will hide all the pitches that are not from the category that the user has selected.
+
+Every pitch has the following available buttons that the sponsor may click on:
+
+\begin{itemize}
+\item A blue button “Show More”, which shows the associated information of the pitch provided by its creator, as well as the information of the creator (name and e-mail) and the pitch’s creation time.
+\item A green button “Offer Sponsorship” that enables a sponsor to offer a match to a pitch.
+\item The button “Offer Sponsorship” is also available from the information box of the pitch that pops up when the blue “Show More” button is pressed, for the sake of convenience.
+\end{itemize}
+
 \chapter{Difficulties of Implementation}
 In the following, we collected the top difficulties each of our PitchApp team members faced during the PitchApp project.
 
 \begin{itemize}
-	\item \textbf{Csaba Kegyes:}
-    \item \textbf{Stella Kamakari:}
+	\item \textbf{Csaba Kegyes:} One difficulty of implementing our ideas about PitchApp was deciding on which technologies to use. For example we had to balance how easy it is to work with a technology and how well it could perform. It would have been a bit easier to work with Vue.js, among others because it uses HTML instead of JSX. But we saw that other elements that we would like to use are better supported by React and also React could give us a better user experience.
+    \item \textbf{Stella Kamakari:} In terms of refactoring, the main challenge was to determine whether best practices have been used, because I had to work with React, while at the same time using the latest version of Javascript.
 	\item \textbf{Ethan Kelly:} The hardest part for me was to research the most suitable way to implement the authentication functionality for PitchApp.
-	\item \textbf{Boglarka Lehoczki:} The most difficult part in creating a UI with React was to learn new technologies and instantly use them according to the best practices to enable others to built on the top of my implementation.
+	\item \textbf{Boglarka Lehoczki:} The most difficult part in creating a UI with React was to learn new technologies and instantly use them according to the best practices to enable others to built on the top of my implementation. One technical problem was to avoid that the dashboard of PitchApp updates itself periodically even when there were no changes made by users, but to force it to update instantly when a change was made.
 
 \end{itemize}
 \chapter{Future Outlook: Missing Components and Functionalities}
-\chapterauthor{by Stella Kamakari}
+
+\chapterauthor{by Csaba Kegyes}
+
+The following areas have been identified, where PitchApp can be improved.
+
+An important improvement is the addition of a new feature that would enable a pitch creator to edit a pitch after submission. Currently, after submitting a new pitch, the creator has no possibility to edit the information inside it, so any typos, ambiguous or incorrect information remains persistent. Of course, the user can always delete it and create a new one, but that also means the time of creation will change as well.
+
+After a pitch owner chooses to filter only the Pitches he/she created, it is impossible to return back to the user’s landing page. The only way for the user to go back is essentially to log out and log in again. Therefore, a new button with the possibility to go back to the landing page would increase the user experience significantly.
+
+Another possible improvement would be to add some social features to PitchApp. Currently, users cannot “like”, “dislike”or comment on pitches, which can make it hard for sponsors to find popular pitches. By implementing this feature, we would give the ability to idea owners and sponsors alike to promote the pitches they think are more relevant to the organization.
+
+It would be also a big motivator for employees to share their ideas, if a completely new dashboard would be introduced, where employees can share details about a successful project, which they initiated using PitchApp. This would also help our PitchApp team to collect valuable information on what are the good experiences with PitchApp and what improvements could be made in the future.
+
 
 
 
