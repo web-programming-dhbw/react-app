@@ -195,12 +195,49 @@ Okta uses a cookie-based authentication mechanism to maintain a user's authentic
 
 \section{GraphQL Hasura Engine as Server}
 \chapterauthor{by Csaba Kegyes}
+
+\textbf{GraphQL}
+
+GraphQL is a query language that provides a technology for having a unified interface for a variety of database systems. For example, it will allow a user to use SQL and MongoDB databases, together. A GraphQL server is usable by common REST calls. 
+One of the reasons why we decided to use GraphQLis that it integrates quite well to REACT through Apollo. This could be due to the fact that both technologies are developed by Facebook. This integration meant that we did not need to develop our own API for a database, defining both the end-points and the queries themselves. For example, by using MongoDB we would have had to host the database itself and a server that is running a MongoDB driver. Accessing the database directly through REST calls is possible but highly insecure.
+The GraphQL client in our REACT application also provides us with more ease of use for development. For instance, the GraphQL client can redo queries on select intervals or when it detects changes; this functionality is built into the client natively, so we didn’t have to use sleep methods or loops for this purpose.
+One downside of using GraphQL is that defining the queries is a long process that cannot be changed during run-time. Besides the queries, type definitions, resolvers also have to be defined. This means that a query doesn’t have to be edited in one file in a centralized manner but in at least three.
+
+\textbf{HasuraGraphQL Engine}
+
+After making our prototype GraphQL server we discovered some of the shortcomings of the technology. Making changes to our schema would require us to redo our GraphQL server as well. And also we could run into some trouble when trying to put this server into a Docker container. We elected to use HasuraGraphQL Engine to try to correct some of these shortcomings. 
+One of the main positives of Hasura is the ability to generate queries and mutations on the fly. When a new table or column is created in the database connected to Hasura, it automatically generates the methods for CRUD operations. This enabled us to run the server and experiment with the data freely.
+Hasura also provides us with Docker files and docker images that we could use for deployment later, whether on a serverless environment like Heroku or on our own Virtual Private Server. 
+
+
 \section{PostgreSQL Database}
 \chapterauthor{by Csaba Kegyes}
+
+PostgreSQL is an open source object-relational database which highlights extensibility and serves a variety of technical standards. We chose to use Postgres because its integration with the HasuraGraphQL engine. Hasura uses it by default and because its availability as an official docker image we can also run it in a containerized way. 
+We also found that the way relational databases represent data was easier to work for us than document-based ones, for example in MongoDB. This could be because of our familiarity with SQL through our courses at DHBW Mannheim.
+
+Our pitch table in our Postgres database is constructed the following way:
+
+\begin{center}
+	\includegraphics{db_table.png}
+\end{center}
+
 \section{Docker}
 \chapterauthor{by Csaba Kegyes}
+
+Docker is an open source tool that uses containers in order to assist both developers and system administrators to create, implement and run applications. Through the containers the application can be shipped in one package along with all its components such as code, libraries, tools etc.
+We decided to use Docker in order to have a clearer separation of reusable components, similar to a micro-service oriented design. With Docker we can get some components that are provided by the developers themselves, like in the case of Hasura and Postgres but we can also make our own one for the React front-end application. 
+With this clear separation we could have much more flexibility when deploying for ourselves or for a potential customer. The components, the front-end, HasuraGraphQL engine, Postgres database, do not have to be on the same server, or hosted on a service that is offered by one provider. For example, the instance that we have provided already uses Heroku for hosting the database and the GraphQL server, while we used Firebase, which supports single-page web applications, to host our front-end.
+In a real-life scenario, containerizing our application would be important because it also allows us to run the applications with popular orchestrators, such as docker swarm or Kubernetes. Providing the safety and automation offered by these technologies is essential for selling a web-service.
+For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our react project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed a custom configuration files to handle a single-page web application.
+These three containers are deployed using a docker-compose file that includes configuration for the ports, volumes and other characteristics so that the three components can work together.
+
+
 \chapter{Final Results}
 \chapterauthor{by Stella Kamakari}
+
+
+
 \chapter{User Manual}
 \chapterauthor{by Stella Kamakari}
 \chapter{Difficulties of Implementation}
