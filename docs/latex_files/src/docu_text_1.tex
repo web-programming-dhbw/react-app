@@ -201,14 +201,18 @@ Okta uses a cookie-based authentication mechanism to maintain a user's authentic
 
 \textbf{GraphQL}
 
-GraphQL is a query language that provides a technology for having a unified interface for a variety of database systems. For example, it will allow a user to use SQL and MongoDB databases, together. A GraphQL server is usable by common REST calls. 
+GraphQL is a query language that provides a technology for having a unified interface for a variety of database systems. For example, it will allow a user to use SQL and MongoDB databases, together. A GraphQL server is usable by common REST calls.
+ 
 One of the reasons why we decided to use GraphQLis that it integrates quite well to React through Apollo. This could be due to the fact that both technologies are developed by Facebook. This integration meant that we did not need to develop our own API for a database, defining both the end-points and the queries themselves. For example, by using MongoDB we would have had to host the database itself and a server that is running a MongoDB driver. Accessing the database directly through REST calls is possible but highly insecure.
+
 The GraphQL client in our React application also provides us with more ease of use for development. For instance, the GraphQL client can redo queries on select intervals or when it detects changes; this functionality is built into the client natively, so we didn’t have to use sleep methods or loops for this purpose.
+
 One downside of using GraphQL is that defining the queries is a long process that cannot be changed during run-time. Besides the queries, type definitions, resolvers also have to be defined. This means that a query doesn’t have to be edited in one file in a centralized manner but in at least three.
 
 \textbf{HasuraGraphQL Engine}
 
-After making our prototype GraphQL server we discovered some of the shortcomings of the technology. Making changes to our schema would require us to redo our GraphQL server as well. And also we could run into some trouble when trying to put this server into a Docker container. We elected to use HasuraGraphQL Engine to try to correct some of these shortcomings. 
+After making our prototype GraphQL server we discovered some of the shortcomings of the technology. Making changes to our schema would require us to redo our GraphQL server as well. And also we could run into some trouble when trying to put this server into a Docker container. We elected to use HasuraGraphQL Engine to try to correct some of these shortcomings.
+ 
 One of the main positives of Hasura is the ability to generate queries and mutations on the fly. When a new table or column is created in the database connected to Hasura, it automatically generates the methods for CRUD operations. This enabled us to run the server and experiment with the data freely.
 Hasura also provides us with Docker files and docker images that we could use for deployment later, whether on a serverless environment like Heroku or on our own Virtual Private Server. 
 
@@ -217,7 +221,8 @@ Hasura also provides us with Docker files and docker images that we could use fo
 
 \chapterauthor{by Csaba Kegyes}
 
-PostgreSQL is an open source object-relational database which highlights extensibility and serves a variety of technical standards. We chose to use Postgres because its integration with the HasuraGraphQL engine. Hasura uses it by default and because its availability as an official docker image we can also run it in a containerized way. 
+PostgreSQL is an open source object-relational database which highlights extensibility and serves a variety of technical standards. We chose to use Postgres because its integration with the HasuraGraphQL engine. Hasura uses it by default and because its availability as an official docker image we can also run it in a containerized way.
+ 
 We also found that the way relational databases represent data was easier to work for us than document-based ones, for example in MongoDB. This could be because of our familiarity with SQL through our courses at DHBW Mannheim.
 
 Our pitch table in our Postgres database is constructed the following way:
@@ -231,11 +236,30 @@ Our pitch table in our Postgres database is constructed the following way:
 \chapterauthor{by Csaba Kegyes}
 
 Docker is an open source tool that uses containers in order to assist both developers and system administrators to create, implement and run applications. Through the containers the application can be shipped in one package along with all its components such as code, libraries, tools etc.
-We decided to use Docker in order to have a clearer separation of reusable components, similar to a micro-service oriented design. With Docker we can get some components that are provided by the developers themselves, like in the case of Hasura and Postgres but we can also make our own one for the React front-end application. 
+
+We decided to use Docker in order to have a clearer separation of reusable components, similar to a micro-service oriented design. With Docker we can get some components that are provided by the developers themselves, like in the case of Hasura and Postgres but we can also make our own one for the React front-end application.
+
 With this clear separation we could have much more flexibility when deploying for ourselves or for a potential customer. The components, the front-end, HasuraGraphQL engine, Postgres database, do not have to be on the same server, or hosted on a service that is offered by one provider. For example, the instance that we have provided already uses Heroku for hosting the database and the GraphQL server, while we used Firebase, which supports single-page web applications, to host our front-end.
+
 In a real-life scenario, containerizing our application would be important because it also allows us to run the applications with popular orchestrators, such as docker swarm or Kubernetes. Providing the safety and automation offered by these technologies is essential for selling a web-service.
+
 For our application we have three containers. One of them is the HasuraGraphQL engine. The image is provided by the developers. One of the other containers is the Postgres database. It is also an official image that can be found on docker-hub. Our third container is the front-end one. In order to build this we first had to run build on our React project that was created using the utility create-react-app. The build folder that was created by this script is included in the image, which is then served by Nginx. Nginx also needed a custom configuration files to handle a single-page web application.
+
 These three containers are deployed using a docker-compose file that includes configuration for the ports, volumes and other characteristics so that the three components can work together.
+
+We have put PitchApp from development mode to a productive mode with Docker by running the following command:
+
+npm run build
+
+This creates a build folder in the same directory that can be served by the npm build serve method or by using other servers, such as Nginx.
+
+After the build process was done the PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
+
+docker build -t "NAME OF IMAGE" .
+
+The name of the image in our case is pitch-docker.
+
+This image can be used separately, as well as the developer and production builds.
 
 
 \chapter{Final Results}
@@ -284,51 +308,52 @@ First, PostgreSQL integrates with the Hasura GraphQL engine, another technology 
 PitchApp is a dynamic application. Information is updated in various areas of the application appropriately. The users, be it idea owners or idea sponsors, view updated information at all times.
 In particular, when an idea owner submits a pitch, it becomes viewable to all other owners and idea sponsors. Furthermore, any sponsor has the possibility to offer a match to a pitch. When that happens, the information of the sponsor as well as when the match happened appear on that pitch (which can be viewed by the creator and the other registered users).
 
-\chapter{User Manual - Development Insight into Running PitchApp}
+\chapter{User Manual - Running PitchApp}
 
 \chapterauthor{by Stella Kamakari}
 
-\subsection{Running PitchApp}
+\section{Way 1 - Accessing the Deployed Version}
 
-For PitchApp, the optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes. 
+We have a working site that can be reached at: https://pitchapp-9f7e5.firebaseapp.com
+
+Also, an instance of the database interface can be reached at https://db-for-pitch.herokuapp.com/console
+
+\section{Way 2 - Running the Local Productive Build}
+
+For PitchApp, the optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before in the respective chapters the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes.
+ 
 Using the command line the following command should be ran from the folder where our docker-compose.yaml file is located:
 
 docker-compose up
 
-This command will automatically download the images and start the application. The front-end can be reached at localhost:8000. When trying this method, the table, that we have described in the section detailing Postgres, has to be created for the application to work. This can be done in the Hasura interface that can be reached at localhost:8080.
+This command will automatically download the images and start the application. The application can be reached at localhost:8000. Hasura database interface is accessible at localhost:8080. After accessing the database interface, one should navigate to the "DATA" button on the top in the grey navigation bar. When running PitchApp this way, the database table - that we have described in Chapter 3.4 about PostgreSQL and have also included here for convenience, has to be created for the application to work. So the next step is to click on the yellow button "Create Table" by leaving the Schema Dropdown at "public". The created table has to have the name "pitch" and contain the following columns with parameters:
 
-We also have a working site that can be reached at: URL. Also, an instance of the database interface can be reached at URL. \todo{add urls}
+\begin{center}
+	\includegraphics{db_table.png}
+\end{center}
 
-In order to run the react front-end, navigate to the 'app' folder in our repository. First the dependencies should be installed. This can be done by the following command:
+After this table is created, one can add the data regarding a pitch to it by the button "Insert row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch. One can only delete a pitch, which was added by him/herself before.
+
+
+\section{Way 3 - Running the Development Mode}
+
+In order to run PitchApp in development mode, open up a terminal and navigate to the 'app' folder in our repository. First the dependencies should be installed. This can be done by the following command:
 
 npm install
 
-After this is done the application can be run in developer mode by running the next command:
+Npm stands for node package manager.
+
+After this is done, the application can be run in developer mode by entering the command:
 
 npm start
 
-It will open localhost:3000 with PitchApp.
+It will open PitchApp on localhost:3000. This version does not have a database connection.
 
-Our React app can also be put into production ready mode by running the following command:
+In order to connect the development version of PitchApp with the database, a second terminal window should be opened and the database should be started manually with the command:
 
-npm run build
-
-This creates a build folder in the same directory that can be served by the build serve method or by using other servers, such as Nginx.
-
-After the build process is done the React application can be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. Run the following command in the command line:
-
-docker build -t "NAME OF IMAGE" .
-
-The name of the image in our case is pitch-docker.
-
-This image can be used separately, as well as the developer and production builds, but they will be missing the database connection.
-During development we started the database connection from one terminal with
 docker-compose up
-and from another terminal we opened the development view of PitchApp with
 
-npm start
-
-\subsection{Implemented Features}
+\section{Implemented Features}
 
 \textbf{Public Section}
 
@@ -367,8 +392,11 @@ An idea owner can create a new pitch by pressing the button “Add Pitch”, whi
 
 The user can publish the pitch by clicking on the button “Submit”. In this case, the user is returned to the landing area, where the new pitch becomes visible.
 If the user wants to cancel the creation of the pitch, he/she can press the button “Cancel” instead, which will return him/her to the landing area.
+
 Once a pitch has been created, the owner of the pitch can view the information of the pitch by pressing the blue “Show More” button that appears inside the box of the pitch.
+
 The creator of a pitch may also delete it by pressing the red “Delete Pitch” button that also appears inside the pitch’s card.
+
 Once a pitch has been matched by a sponsor, the owner of the pitch can see this information, along with the information of the sponsor who matched it (name and e-mail), as well as when the match occurred, inside the box of the pitch.
 
 
@@ -403,7 +431,7 @@ The following areas have been identified, where PitchApp can be improved.
 
 An important improvement is the addition of a new feature that would enable a pitch creator to edit a pitch after submission. Currently, after submitting a new pitch, the creator has no possibility to edit the information inside it, so any typos, ambiguous or incorrect information remains persistent. Of course, the user can always delete it and create a new one, but that also means the time of creation will change as well.
 
-After a pitch owner chooses to filter only the Pitches he/she created, it is impossible to return back to the user’s landing page. The only way for the user to go back is essentially to log out and log in again. Therefore, a new button with the possibility to go back to the landing page would increase the user experience significantly.
+After a pitch owner chooses to filter only the pitches he/she created, it is impossible to return back to the user’s landing page. The only way for the user to go back is essentially to log out and log in again. Therefore, a new button with the possibility to go back to the landing page would increase the user experience significantly.
 
 Another possible improvement would be to add some social features to PitchApp. Currently, users cannot “like”, “dislike”or comment on pitches, which can make it hard for sponsors to find popular pitches. By implementing this feature, we would give the ability to idea owners and sponsors alike to promote the pitches they think are more relevant to the organization.
 
