@@ -13,7 +13,7 @@ PitchApp is a dynamic, single-page web-application with database connection that
 
 \break
 
-The table above shows how PitchApp fulfills the given project requirements.
+In the table above, the characteristics of PitchApp are collected to show how it fulfills the project requirements.
 
 \begin{center}
 \includegraphics{pitchapp_saas.png}
@@ -104,7 +104,7 @@ An other advantage of React, that it is secure. By programming in JSX, it is saf
 
 Additionally, Bootstrap \parencite{Bootstrap} should be mentioned, because Reactstrap component-templates are based on Bootstrap 4. Using the Bootstrap 4 layout grid system (more information can be found on \parencite{Bootstrap_grid}) facilitated the creation of a responsive UI, which was an explicit requirement for PitchApp. For this reason, PitchApp follows the principles of responsive web-design, which means that our web-application can be used on various sizes of screens including mobile phones and tablets. The UI components of PitchApp are able to automatically resize and move to display a nice-looking view on all kind of devices or window-sizes.
 
-The following figures show how a full window-size version and a small window-size version of PitchApp's UI look with the reorganized UI elements.
+The following figures show how a full window-size version and a small window-size version of the landing page of PitchApp's UI look with the reorganized UI elements.
 
 \begin{center}
 	\includegraphics{pitchapp_big.png}
@@ -306,15 +306,17 @@ First, PostgreSQL integrates with the Hasura GraphQL engine, another technology 
 \textbf{Dynamic Content}
 
 PitchApp is a dynamic application. Information is updated in various areas of the application appropriately. The users, be it idea owners or idea sponsors, view updated information at all times.
-In particular, when an idea owner submits a pitch, it becomes viewable to all other owners and idea sponsors. Furthermore, any sponsor has the possibility to offer a match to a pitch. When that happens, the information of the sponsor as well as when the match happened appear on that pitch (which can be viewed by the creator and the other registered users).
+In particular, when an idea owner submits a pitch, it becomes viewable to all users. Furthermore, any sponsor has the possibility to offer a match to a pitch. When that happens, the information of the sponsor as well as when the match happened appear on that pitch (which can be viewed by the creator and the other registered users).
 
 \chapter{User Manual - Running PitchApp}
 
 \chapterauthor{by Stella Kamakari}
 
-There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp.
+There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp into this Chapter.
 
 A prerequisite to log into the member area of PitchApp is to get a registration email from Okta and follow the steps included in the email. The responsible contact person from our side in case of any problem with the login or loss of registration email is Ethan Kelly (available at ejk850@gmail.com). He has already provided a superuser account to the email address mail@benedikt-sondermann.de.
+
+If you have further question or any kind of trouble to start PitchApp, please contact Boglarka Lehoczki (lehoczkiboglarka91@gmail.com).
 
 For Way 2 and Way 3 the following git repository should be cloned:
 
@@ -378,6 +380,8 @@ In order to connect the development version of PitchApp with the database, a sec
 
 docker-compose up
 
+To try out the app and create a database table please see Way 2.
+
 \section{Implemented Features}
 
 \textbf{Public Section}
@@ -415,19 +419,19 @@ An idea owner can create a new pitch by pressing the button “Add Pitch”, whi
 \item there is also a drop-down menu for selecting the category of the pitch, e.g. HR or Production.
 \end{itemize}
 
-The user can publish the pitch by clicking on the button “Submit”. In this case, the user is returned to the landing area, where the new pitch becomes visible.
-If the user wants to cancel the creation of the pitch, he/she can press the button “Cancel” instead, which will return him/her to the landing area.
+The user can publish the pitch by clicking on the button “Submit”. In this case, the user is returned to the dashboard, where the new pitch becomes visible.
+If the user wants to cancel the creation of the pitch, he/she can press the button “Cancel” instead, which will return him/her to the dashboard.
 
-Once a pitch has been created, the owner of the pitch can view the information of the pitch by pressing the blue “Show More” button that appears inside the box of the pitch.
+Once a pitch has been created, the owner of the pitch can view the information of the pitch by pressing the blue “Show More” button that appears inside the card of the pitch.
 
 The creator of a pitch may also delete it by pressing the red “Delete Pitch” button that also appears inside the pitch’s card.
 
-Once a pitch has been matched by a sponsor, the owner of the pitch can see this information, along with the information of the sponsor who matched it (name and e-mail), as well as when the match occurred, inside the box of the pitch.
+Once a pitch has been matched by a sponsor, the owner of the pitch can see this information, along with the information of the sponsor who matched it (name and e-mail), as well as when the match occurred, inside the card of the pitch.
 
 
 \textbf{User Area Section for Idea Sponsor}
 
-The landing page of the idea sponsor includes a list of all the pitches that have been published already.
+The dashboard of the idea sponsor includes a list of all the pitches that have been published already.
 The user can filter through the published pitches by clicking on the button “Search Pitches by Area” and then selecting an area of interest from the drop-down menu that appears. This will hide all the pitches that are not from the category that the user has selected.
 
 Every pitch has the following available buttons that the sponsor may click on:
