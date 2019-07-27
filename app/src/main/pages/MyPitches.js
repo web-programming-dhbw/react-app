@@ -41,7 +41,6 @@ export default withAuth(class MyPitches extends Component {
           <Row>
             <Query query={FILTER_QUERY} pollInterval={500} variables={{email: this.props.userDetails.email}}>
               {({ loading, error, data }) => {
-                if (data) console.log(data);
                 if (loading) return <Col><Spinner color="primary" /></Col>;
                 if (error) return <Col><h4>Cannot connect to the database or to public schema</h4></Col>;
 
@@ -50,7 +49,7 @@ export default withAuth(class MyPitches extends Component {
                     {
                       data.pitch.length ? data.pitch.map(pitch => (
                         <Col xl={4} xs={6}>
-                          <Pitch userEmail={this.props.userDetails.email} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
+                          <Pitch userEmail={this.props.userDetails.email} userName={this.props.userDetails.name} isManager={this.props.userDetails.groups.includes("Managers")} key={pitch.id} pitch={pitch} />
                         </Col>
                       )) : <Col><h4>You have no Pitches yet. Add or sponsor a Pitch to get started</h4></Col>
                     }

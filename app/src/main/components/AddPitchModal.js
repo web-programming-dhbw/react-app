@@ -44,6 +44,25 @@ const POST_MUTATION = gql`
   }
   `
 
+  const FILTER_QUERY = gql`
+  query FilterQuery($email: String!) {
+    pitch(where: {_or: [{owner_email: {_eq: $email}}, {sponsor_email: {_eq: $email}}]}) {
+      id
+      is_matched
+      matched_timestamp
+      owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
+      title
+      desc
+      creation_timestamp
+      category
+    }
+  }
+`;
+
 class AddPitchModal extends React.Component {
   constructor(props) {
     super(props);
@@ -114,7 +133,7 @@ class AddPitchModal extends React.Component {
           <ModalFooter>
           <Mutation mutation={POST_MUTATION} variables={{ category: this.state.category,
              owner:this.props.userName, title:this.state.title, desc:this.state.desc, owner_email: this.props.userEmail, is_matched: this.state.is_matched, resources: this.state.resources, creation_timestamp: new Date().toISOString()}}
-             refetchQueries={() => {return [{query: PITCHES_QUERY}]}}>
+             refetchQueries={() => {return [{query: PITCHES_QUERY}, {query: FILTER_QUERY, variables: {email: this.props.userEmail}}]}}>
                 {PitchMutation => <Button color="success" onClick={(event) => {PitchMutation(); this.toggle();}}>Submit</Button>}
           </Mutation>
           <Button color="secondary" onClick={this.toggle}>Cancel</Button>

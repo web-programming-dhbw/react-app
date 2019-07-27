@@ -23,6 +23,25 @@ const PITCHES_QUERY = gql`
   }
 `;
 
+const FILTER_QUERY = gql`
+  query FilterQuery($email: String!) {
+    pitch(where: {_or: [{owner_email: {_eq: $email}}, {sponsor_email: {_eq: $email}}]}) {
+      id
+      is_matched
+      matched_timestamp
+      owner
+      owner_email
+      resources
+      sponsor_email
+      sponsor_name
+      title
+      desc
+      creation_timestamp
+      category
+    }
+  }
+`;
+
 const MATCH_PITCH = gql`
   mutation($id: Int!, $is_matched: Boolean!, $sponsor_name: String!, $sponsor_email: String!, $matched_timestamp: String!) {
     update_pitch(where: {id: {_eq: $id}}, _set: {is_matched: $is_matched, matched_timestamp: $matched_timestamp, sponsor_email: $sponsor_email, sponsor_name: $sponsor_name}) {
@@ -48,10 +67,6 @@ const DELETE_PITCH = gql`
 `;
 
 export default class Pitch extends Component {
-  state = {
-    deleteSuccessful: null
-  }
-
   render() {
   return (
     <Card style={{ marginBottom: "40px", height: "400px", overflow: "auto" }}>
@@ -66,12 +81,13 @@ export default class Pitch extends Component {
           <Col><ShowMore pitch={this.props.pitch} isManager={this.props.isManager} userName={this.props.userName} userEmail={this.props.userEmail} /></Col>
 
           <Mutation mutation={MATCH_PITCH}
-          variables={{ id: this.props.pitch.id, is_matched: true, matched_timestamp: new Date().toISOString(), sponsor_name: this.props.userName, sponsor_email: this.props.userEmail}}>
+          variables={{ id: this.props.pitch.id, is_matched: true, matched_timestamp: new Date().toISOString(), sponsor_name: this.props.userName, sponsor_email: this.props.userEmail}}
+          refetchQueries={() => {return [{query: PITCHES_QUERY}, {query: FILTER_QUERY, variables: {email: this.props.userEmail}}]}}>
                 {offerSponsorship => this.props.isManager && !this.props.pitch.is_matched ? <Col><Button onClick={offerSponsorship} color='success' size="sm">Offer Sponsorship</Button></Col> : <span />}
           </Mutation>
 
           <Mutation mutation={DELETE_PITCH} variables={{ id: this.props.pitch.id}}
-          refetchQueries={() => {return [{query: PITCHES_QUERY}]}}>
+          refetchQueries={() => {return [{query: PITCHES_QUERY}, {query: FILTER_QUERY, variables: {email: this.props.userEmail}}]}}>
                 {deletePitch => this.props.userEmail === this.props.pitch.owner_email ? <Col><Button onClick={deletePitch} color='danger' size="sm">Delete Pitch</Button></Col> : <span />}
           </Mutation>
 
