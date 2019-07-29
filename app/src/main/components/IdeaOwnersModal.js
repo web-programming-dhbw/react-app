@@ -33,7 +33,7 @@ class IdeaOwnersModal extends React.Component {
             <h5>How do we make sure that you idea remains your idea?</h5>
             <br/>
             <p style={{textAlign: "justify" }}>
-            For all pitch posted, we automaticly save and display the creation data, like who and when added the certain idea to the dashboard of PitchApp. In this way, in case of a conflict about the origin of a project idea, you can count on us!
+            For all pitch posted, we automatically save and display the creation data, like who and when added the certain idea to the dashboard of PitchApp. In this way, in case of a conflict about the origin of a project idea, you can count on us!
             </p>
             <br/>
             <h5>What to be done if your pitch was matched?</h5>
