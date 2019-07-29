@@ -27,7 +27,7 @@ const config = {
 }
 
 const client = new ApolloClient({
-  uri: 'https://db-for-pitch.herokuapp.com/v1/graphql'
+  uri: 'http://localhost:8080/v1alpha1/graphql'
 });
 
 export default class App extends Component {
