@@ -43,7 +43,7 @@ const FILTER_QUERY = gql`
 `;
 
 const MATCH_PITCH = gql`
-  mutation($id: Int!, $is_matched: Boolean!, $sponsor_name: String!, $sponsor_email: String!, $matched_timestamp: String!) {
+  mutation($id: Int!, $is_matched: Boolean!, $sponsor_name: String!, $sponsor_email: String!, $matched_timestamp: timestamptz!) {
     update_pitch(where: {id: {_eq: $id}}, _set: {is_matched: $is_matched, matched_timestamp: $matched_timestamp, sponsor_email: $sponsor_email, sponsor_name: $sponsor_name}) {
       returning {
         id
