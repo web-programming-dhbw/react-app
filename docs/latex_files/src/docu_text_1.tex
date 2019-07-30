@@ -247,20 +247,13 @@ For our application we have three containers. One of them is the HasuraGraphQL e
 
 These three containers are deployed using a docker-compose file that includes configuration for the ports, volumes and other characteristics so that the three components can work together.
 
-We have put PitchApp from development mode to a productive mode with Docker by running the following command:
+For PitchApp, an optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. The images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes.
 
-npm run build
+Using the command line the following command should be ran from the folder where our docker-compose.yaml file is located:
 
-This creates a build folder in the same directory that can be served by the npm build serve method or by using other servers, such as Nginx.
+docker-compose up
 
-After the build process was done PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
-
-docker build -t "NAME OF IMAGE" .
-
-The name of the image in our case is pitch-docker.
-One would build a docker image like this to deploy PitchApp's new functionalities or its modified code. Only to use the application, there is no need to run build commands.
-This image can be used separately, as well as the developer and production builds.
-
+This command will automatically download the images and start the application. The application can be reached at localhost:8000. Hasura database interface is accessible at localhost:8080. 
 
 \chapter{Final Results}
 
@@ -273,12 +266,16 @@ The public section of PitchApp is comprised of a single web page that guests vis
 \textbf{Registered User Area}
 
 The user area for both the idea owner and the idea sponsor have been implemented as planned. The main features for an idea owner are pitch creation, pitch deletion, and showing sponsor information in the event of a match.
+
 Pitch creation is handled by an appropriate form that enables the user to enter a title for the pitch, the general area that is pertinent to the pitch (e.g. HR or Procurement), the pitch’s description, as well as resources that are required for its completion.
 Pitch deletion is as easy as clicking on a button and can be performed only by the user who created the pitch. With this, we ensured that none else can delete a pitch except the idea owner him/herself.
 In case of a match, the idea owner can also see the information of the sponsor that matched it. In particular, it shows the name and e-mail address of the sponsor as well as the exact time when the match took place. After that, it is up to the pitch creator to contact the sponsor that matched the pitch.
+With the "My Pitches" button the idea owner can display only those pitches which he/she created. Pressing on the logo in the top left corner navigates back to the dashboard with all pitches in the system.
+Idea owners can filter pitches based on their general area, so they can view pitches related to a specific organizational field, which were registered by others. If they want to return to browse among all pitches again, they can click on "Show All Pitches" in the "Search Pitches by Area" dropdown or on the logo on the top left.
 
 The main feature of idea sponsors is to view pitches and specific information about them, as well as offer a match to a pitch. When sponsors log in, they view a list of available pitches if these have been previously created by colleagues.
 A sponsor can view the information of a pitch that its owner registered when the pitch was created. A sponsor can then match a pitch, which is as simple as clicking on a button. The pitch creator then receives the information of the sponsor as described above.
+With the "My Pitches" button the sponsor can display only those pitches which he/she matched. Pressing on the logo in the top left corner navigates back to the dashboard with all pitches in the system.
 Finally, sponsors can filter pitches based on their general area, so they can focus on the pitches they are more interested in. If they want to return to browse among all pitches again, they can click on "Show All Pitches" in the "Search Pitches by Area" dropdown or on the logo on the top left.
 
 \textbf{User Management}
@@ -314,9 +311,23 @@ In particular, when an idea owner submits a pitch, it becomes viewable to all us
 
 There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp into this Chapter.
 
-A prerequisite to log into the member area of PitchApp is to get a registration email from Okta and follow the steps included in the email. The responsible contact person from our side in case of any problem with the login or loss of registration email is Ethan Kelly (available at ejk850@gmail.com). He has already provided a superuser account to the email address mail@benedikt-sondermann.de.
+A prerequisite to log into the member area of PitchApp is to get a registration email from Okta and follow the steps included in the email. The responsible contact person from our side in case of any problem with the login or loss of registration email is Ethan Kelly (available at ejk850@gmail.com). He has already provided a super user account to the email address mail@benedikt-sondermann.de.
 
 If you have further question or any kind of trouble to start PitchApp, please contact Boglarka Lehoczki (lehoczkiboglarka91@gmail.com).
+
+\section{Way 1 - Accessing the Deployed Version}
+
+We have a working site that can be reached at: https://pitchapp-9f7e5.firebaseapp.com
+
+Also, an instance of the database interface can be reached at
+
+https://db-for-pitch.herokuapp.com/console
+
+This second link is only shared inside our team and for evaluation purposes.
+
+\section{Running PitchApp Locally}
+
+PitchApp can be run locally as a local productive build (described by Way 2) and in development mode (described by Way 3).
 
 For Way 2 and Way 3 the following git repository should be cloned:
 
@@ -335,52 +346,59 @@ and
 
 https://docs.docker.com/machine/drivers/hyper-v/
 
-\section{Way 1 - Accessing the Deployed Version}
+In order to run PitchApp locally, open up a terminal and navigate to the 'app' folder in our repository. This 'app' folder contains our docker-compose.yaml file and can be found inside 'react-app' folder. First the dependencies should be installed. This can be done by the following command:
 
-We have a working site that can be reached at: https://pitchapp-9f7e5.firebaseapp.com
+npm install
 
-Also, an instance of the database interface can be reached at
+Next, make sure that docker desktop is running before typing in the following command:
 
-https://db-for-pitch.herokuapp.com/console
+npm run build
 
-This second link is only shared inside our team and for evaluation purposes.
+This creates a build folder in the same directory that can be served by the npm build serve method or by using other servers, such as Nginx.
 
-\section{Way 2 - Running the Local Productive Build}
+After the build process was done PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
 
-For PitchApp, an optimal way to run the whole application is through Docker. We have provided a docker-compose file that takes all of the images that are needed and runs them on the proper ports. As it was discussed before in the respective chapters the images that are taken for HasuraGraphQL Engine and Postgres are official ones. However, the one for PitchApp is our own that was uploaded to DockerHub with the account of Csaba Kegyes.
- 
-Using the command line the following command should be ran from the folder where our docker-compose.yaml file is located:
+docker build -t pitch-docker .
+
+The name of the image in our case is pitch-docker. Make sure that an empty space and a dot is added at the end of this command.
+
+It is necessary only once to build the pitch-docker image on a local machine to use PitchApp.
+Moreover, one would build a docker image like this to deploy PitchApp's new functionalities or its modified code. Only to use the application, there is no need to run build commands regularly.
+One the image is build, it can be used separately, as well as the developer and production builds.
+
+After this, we start PitchApp with:
 
 docker-compose up
 
-This command will automatically download the images and start the application. The application can be reached at localhost:8000. Hasura database interface is accessible at localhost:8080. After accessing the database interface, one should navigate to the "DATA" button on the top in the grey navigation bar. When running PitchApp this way, the database table - that we have described in Chapter 3.4 about PostgreSQL and have also included here for convenience, has to be created for the application to work. So the next step is to click on the yellow button "Create Table" by leaving the Schema Dropdown at "public". The created table has to have the name "pitch" and contain the following columns with parameters:
+The next step is to navigate to localhost:8080 using a browser (preferably Google Chrome). With this, we can access the Hasura database interface of PitchApp. Here, one should navigate to the "DATA" button on the top in the grey navigation bar. When running PitchApp this way, the database table - that we described in Chapter 3.4 about PostgreSQL - has to be created for the application to work. So the next step is to click on the yellow button "Create Table" by leaving the Schema Dropdown at "public". The created table has to have the name "pitch" and contain the following columns with parameters:
 
 \begin{center}
-	\includegraphics{db_table.png}
+	\includegraphics{pitch_table.png}
+\end{center}
+
+Hasura is case sensitive. All the attribute names should be typed in with lower case.
+To correct any misspelling, one can navigate to 'Modify' and change the name or type of the attributes.
+The following figure shows how the Hasura interface navigation bar looks like once 'pitch' table is created.
+
+\begin{center}
+	\includegraphics{hasura_header.png}
 \end{center}
 
 After this table is created, one can add the data regarding a pitch to it by the button "Insert row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch, which is how the application normally shall be used. Thus, one can only delete a pitch using PitchApp's UI, which was added by him/herself before.
 
+\subsection{Way 2 - Running the Local Productive Build}
 
-\section{Way 3 - Running the Development Mode}
+To run the local productive build, navigate to localhost:8000. Here the landing page of PitchApp can be accessed. Click on the "Login" button and log in with Okta to access the member area.
 
-In order to run PitchApp in development mode, open up a terminal and navigate to the 'app' folder in our repository. First the dependencies should be installed. This can be done by the following command:
+\subsection{Way 3 - Running the Development Mode}
 
-npm install
+In order to run PitchApp in development mode, open up a new terminal window and navigate to the 'app' folder again.
 
-Npm stands for node package manager.
-
-After this is done, the application can be run in developer mode by entering the command:
+After this is done, the application can be run in development mode by entering the command:
 
 npm start
 
-It will open PitchApp on localhost:3000. This version does not have a database connection.
-
-In order to connect the development version of PitchApp with the database, a second terminal window should be opened again in the 'app' folder in our repository and the database should be started manually with the command:
-
-docker-compose up
-
-To try out the app and create a database table please see Way 2.
+It will open PitchApp on localhost:3000. As this version does not have a database connection by default, the first terminal window with the last command docker-compose up should be still open, in order to connect the development version of PitchApp with the database.
 
 \section{Implemented Features}
 
@@ -460,7 +478,7 @@ The following areas have been identified, where PitchApp can be improved.
 
 An important improvement is the addition of a new feature that would enable a pitch creator to edit a pitch after submission. Currently, after submitting a new pitch, the creator has no possibility to edit the information inside it, so any typos, ambiguous or incorrect information remains persistent. Of course, the user can always delete it and create a new one, but that also means the time of creation will change as well.
 
-After a pitch owner chooses to filter only the pitches he/she created, it is impossible to return back to the user’s landing page. The only way for the user to go back is essentially to log out and log in again. Therefore, a new button with the possibility to go back to the landing page would increase the user experience significantly.
+After a user filters only the pitches he/she created or matched, it is possible to return to the dashboard, which shows all pitches, by clicking on the logo top left. In the future, we want to make our application even more convenient to use. Therefore, a creation of a new button with the possibility to go back to the dashboard  or the change of the text to "Return to Dashboard" and the function of the "My Pitches" button would increase the user experience.
 
 Another possible improvement would be to add some social features to PitchApp. Currently, users cannot “like”, “dislike”or comment on pitches, which can make it hard for sponsors to find popular pitches. By implementing this feature, we would give the ability to idea owners and sponsors alike to promote the pitches they think are more relevant to the organization.
 
