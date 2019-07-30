@@ -52,9 +52,10 @@ export default withAuth(class AppBar extends Component {
           <NavbarBrand style={{ color: 'white' }} >PitchApp</NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
+              {this.props.authenticated ?
               <Link to="/mypitches">
                 <Button color="primary" onClick={this.props.authenticated ? () => {} : this.login}>My Pitches</Button>{' '}
-              </Link>
+              </Link> : ()=>{}}
             </NavItem>
             <NavItem>
               {this.props.authenticated ? <Button onClick={this.logout} color="danger">Logout</Button> : <Button onClick={this.login} color="success">Login</Button>}

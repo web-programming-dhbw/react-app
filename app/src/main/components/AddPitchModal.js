@@ -24,7 +24,7 @@ const PITCHES_QUERY = gql`
 `;
 
 const POST_MUTATION = gql`
-  mutation PitchMutation($category: String!, $owner: String!, $title: String!, $desc: String!, $owner_email: String!, $is_matched: Boolean!, $resources: String!, $creation_timestamp: String!)  {
+  mutation PitchMutation($category: String!, $owner: String!, $title: String!, $desc: String!, $owner_email: String!, $is_matched: Boolean!, $resources: String!, $creation_timestamp: timestamptz!)  {
     insert_pitch(objects: {category: $category, owner: $owner, title: $title, desc: $desc, owner_email: $owner_email, is_matched: $is_matched, resources: $resources, creation_timestamp: $creation_timestamp}) {
       returning {
         category
