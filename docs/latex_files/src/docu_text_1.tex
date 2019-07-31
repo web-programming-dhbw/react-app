@@ -61,7 +61,7 @@ Developing a web-application was a given requirement and it has several advantag
 
 \break
 
-\section{Technologies used for each Tier of PitchApp's Architecture}
+\section{Overview of Technologies used in each Tier of PitchApp's Architecture}
 
 We selected state-of-the-art technologies to implement PitchApp. To develop a dynamic single-page web-application, React was used. With Reactstrap, we were able to create a responsive and neat-looking UI. Including an Okta modul to our web-application helped us to provide our users a secure authentication, user- and session management system. Our back-end is a Hasura GraphQL Engine which communicates easily with a PostgreSQL database. The following figure shows the architecture of PitchApp.
 
@@ -307,7 +307,7 @@ In particular, when an idea owner submits a pitch, it becomes viewable to all us
 
 \chapter{User Manual - Running PitchApp}
 
-\chapterauthor{by Stella Kamakari}
+\chapterauthor{by Stella Kamakari and Boglarka Lehoczki}
 
 There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp into this Chapter.
 
@@ -317,13 +317,15 @@ If you have further question or any kind of trouble to start PitchApp, please co
 
 \section{Way 1 - Accessing the Deployed Version}
 
-We have a working site that can be reached at: https://pitchapp-9f7e5.firebaseapp.com
+We have a working site that can be reached at:
+
+\textbf{https://pitchapp-9f7e5.firebaseapp.com}
 
 Also, an instance of the database interface can be reached at
 
 https://db-for-pitch.herokuapp.com/console
 
-This second link is only shared inside our team and for evaluation purposes.
+This second link is only shared inside our team and for evaluation purposes. After the go-live decision is made by our project sponsors, we secure the GraphQL endpoint with configuring an admin secret key according to the Hasura documentation \parencite{Secure_Endpoint}.
 
 \section{Running PitchApp Locally}
 
@@ -331,7 +333,7 @@ PitchApp can be run locally as a local productive build (described by Way 2) and
 
 For Way 2 and Way 3 the following git repository should be cloned:
 
-https://github.com/web-programming-dhbw/react-app
+\textbf{https://github.com/web-programming-dhbw/react-app}
 
 Way 2 and Way 3 may require some additional download as well.
 Node package manager (npm) may be missing and should be downloaded from:
@@ -346,19 +348,23 @@ and
 
 https://docs.docker.com/machine/drivers/hyper-v/
 
-In order to run PitchApp locally, open up a terminal and navigate to the 'app' folder in our repository. This 'app' folder contains our docker-compose.yaml file and can be found inside 'react-app' folder. First the dependencies should be installed. This can be done by the following command:
+It takes \textbf{5-7 minutes} to follow the steps below.
 
-npm install
+\begin{enumerate}
 
-Next, make sure that docker desktop is running before typing in the following command:
+\item In order to run PitchApp locally, open up a terminal and navigate to the "app" folder in our repository. This "app" folder contains our docker-compose.yaml file and can be found inside "react-app" folder. First the dependencies should be installed. This can be done by the following command:
 
-npm run build
+\textbf{npm install}
+
+\item Next, make sure that docker desktop is running before typing in the following command:
+
+\textbf{npm run build}
 
 This creates a build folder in the same directory that can be served by the npm build serve method or by using other servers, such as Nginx.
 
-After the build process was done PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
+\item After the build process was done, PitchApp could be put into a container. There is already a Docker file that specifies how this should be done using a base Nginx image. So we run the following command in the command line:
 
-docker build -t pitch-docker .
+\textbf{docker build -t pitch-docker .}
 
 The name of the image in our case is pitch-docker. Make sure that an empty space and a dot is added at the end of this command.
 
@@ -366,25 +372,29 @@ It is necessary only once to build the pitch-docker image on a local machine to 
 Moreover, one would build a docker image like this to deploy PitchApp's new functionalities or its modified code. Only to use the application, there is no need to run build commands regularly.
 One the image is build, it can be used separately, as well as the developer and production builds.
 
-After this, we start PitchApp with:
+\item After this, we start PitchApp with:
 
-docker-compose up
+\textbf{docker-compose up}
 
-The next step is to navigate to localhost:8080 using a browser (preferably Google Chrome). With this, we can access the Hasura database interface of PitchApp. Here, one should navigate to the "DATA" button on the top in the grey navigation bar. When running PitchApp this way, the database table - that we described in Chapter 3.4 about PostgreSQL - has to be created for the application to work. So the next step is to click on the yellow button "Create Table" by leaving the Schema Dropdown at "public". The created table has to have the name "pitch" and contain the following columns with parameters:
+\item The next step is to navigate to localhost:8080 using a browser (preferably Google Chrome). With this, we can access the Hasura database interface of PitchApp. Here, one should navigate to the "DATA" button on the top in the grey navigation bar. When running PitchApp this way, the database table - that we described in Chapter 3.4 about PostgreSQL - has to be created for the application to work. So the next step is to click on the yellow button "Create Table" by leaving the Schema Dropdown at "public". The created table has to have the name "pitch" and contain the following columns with parameters:
 
 \begin{center}
 	\includegraphics{pitch_table.png}
 \end{center}
 
-Hasura is case sensitive. All the attribute names should be typed in with lower case.
-To correct any misspelling, one can navigate to 'Modify' and change the name or type of the attributes.
-The following figure shows how the Hasura interface navigation bar looks like once 'pitch' table is created.
+Hasura is case sensitive. All the attribute names should be typed in with lower case. Scroll a bit down to set the "id" attribute to be a primary key. The "pitch" table should be set up only once and will be saved locally.
+To correct any misspelling, one can navigate to "Modify" and change the name or type of the attributes.
+The following figure shows how the Hasura interface navigation bar looks like once "pitch" table is created.
 
 \begin{center}
 	\includegraphics{hasura_header.png}
 \end{center}
 
-After this table is created, one can add the data regarding a pitch to it by the button "Insert row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch, which is how the application normally shall be used. Thus, one can only delete a pitch using PitchApp's UI, which was added by him/herself before.
+
+
+\item After this table is created, one can add the data regarding a pitch to it by the button "Insert Row". The rows of this table can be also manipulated from the UI of PitchApp by adding a pitch or deleting a pitch, which is how the application normally shall be used. Thus, one can only delete a pitch using PitchApp's UI, which was added by him/herself before.
+
+\end{enumerate}
 
 \subsection{Way 2 - Running the Local Productive Build}
 
@@ -392,7 +402,7 @@ To run the local productive build, navigate to localhost:8000. Here the landing 
 
 \subsection{Way 3 - Running the Development Mode}
 
-In order to run PitchApp in development mode, open up a new terminal window and navigate to the 'app' folder again.
+In order to run PitchApp in development mode, open up a new terminal window and navigate to the "app" folder again.
 
 After this is done, the application can be run in development mode by entering the command:
 
@@ -400,7 +410,10 @@ npm start
 
 It will open PitchApp on localhost:3000. As this version does not have a database connection by default, the first terminal window with the last command docker-compose up should be still open, in order to connect the development version of PitchApp with the database.
 
+We used this way to run PitchApp during its development to be able to see changes without rebuilding the application's image all the time after an initial image was built.
+
 \section{Implemented Features}
+\chapterauthor{by Stella Kamakari}
 
 \textbf{Public Section}
 
@@ -425,7 +438,7 @@ These services are provided by Okta and are features included in PitchApp “as-
 The user can sign up for a new account by hitting the button “Sign up”, which leads to a new form. There, the user must fill in the required fields “Email”, “Password”, “First name” and “Last name” and hit the button “Register”.
 New account cannot be created without approval by an administrator (Ethan Kelly is responsible for the approval of new accounts and the types of user accounts, e.g. idea sponsor).
 
-
+\break
 \textbf{User Area Section for Idea Owner}
 
 An idea owner can create a new pitch by pressing the button “Add Pitch”, which opens up a new form to fill in the information pertinent to the new pitch. There are fields corresponding to each piece of information the user can enter, including:
