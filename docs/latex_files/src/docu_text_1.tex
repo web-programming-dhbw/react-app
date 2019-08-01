@@ -261,14 +261,14 @@ This command will automatically download the images and start the application. T
 
 \textbf{Public Section}
 
-The public section of PitchApp is comprised of a single web page that guests visit when they want to use the application. This web page presents the main idea behind PitchApp, information for idea owners and idea sponsors, as well as our privacy policy about how PitchApp protects the ownership of ideas. Finally, it includes a button to sign in with Okta or the user can click on the "My Pitches" button to do the same. Once the user logs in with his or her email address as user name and password, he/she can access the rest of the functionality offered by PitchApp, depending on whether the user is an idea owner or a sponsor.
+The public section of PitchApp is comprised of a single web page that guests visit when they want to use the application. This web page presents the main idea behind PitchApp, information for idea owners and idea sponsors, as well as our privacy policy about how PitchApp protects the ownership of ideas. Finally, it includes a button to log in with Okta. Once the user logs in with his or her email address as user name and password, he/she can access the rest of the functionality offered by PitchApp, depending on whether the user is an idea owner or a sponsor. Please note that only for testing and evaluation purposes a third user type called super user was added, which has both sponsor and idea owner rights.
 
 \textbf{Registered User Area}
 
 The user area for both the idea owner and the idea sponsor have been implemented as planned. The main features for an idea owner are pitch creation, pitch deletion, and showing sponsor information in the event of a match.
 
 Pitch creation is handled by an appropriate form that enables the user to enter a title for the pitch, the general area that is pertinent to the pitch (e.g. HR or Procurement), the pitch’s description, as well as resources that are required for its completion.
-Pitch deletion is as easy as clicking on a button and can be performed only by the user who created the pitch. With this, we ensured that none else can delete a pitch except the idea owner him/herself.
+Pitch deletion can be done by clicking on a button and can be performed only by the user who created the pitch. With this check, we ensured that none else can delete a pitch except the idea owner him/herself. Before deleting a pitch, the idea owner is asked again "Are you sure?". With building in this additional question, we wanted to avoid accidental deletions.
 In case of a match, the idea owner can also see the information of the sponsor that matched it. In particular, it shows the name and e-mail address of the sponsor as well as the exact time when the match took place. After that, it is up to the pitch creator to contact the sponsor that matched the pitch.
 With the "My Pitches" button the idea owner can display only those pitches which he/she created. Pressing on the logo in the top left corner navigates back to the dashboard with all pitches in the system.
 Idea owners can filter pitches based on their general area, so they can view pitches related to a specific organizational field, which were registered by others. If they want to return to browse among all pitches again, they can click on "Show All Pitches" in the "Search Pitches by Area" dropdown or on the logo on the top left.
@@ -295,6 +295,8 @@ Users from companies receive an email from Okta, where they follow the steps of 
 
 To demonstrate the full capabilities of PitchApp and test its functionalities, we created a third user type - a super user - which has the rights of both sponsors and idea owners. This kind of user was provided in order to evaluate and note PitchApp.
 
+\break
+
 \textbf{Linked to a Database}
 
 The functionality of PitchApp is based on database access. The database chosen for PitchApp was PostgreSQL, an open source object-relational database. The motivation for choosing PostgreSQL includes the following reasons.
@@ -309,7 +311,7 @@ In particular, when an idea owner submits a pitch, it becomes viewable to all us
 
 \chapterauthor{by Stella Kamakari and Boglarka Lehoczki}
 
-There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp into this Chapter.
+There are three ways to try out our application. We listed these ordered according to their difficulty level. We also included the a detailed description of the implemented features of PitchApp into this chapter.
 
 A prerequisite to log into the member area of PitchApp is to get a registration email from Okta and follow the steps included in the email. The responsible contact person from our side in case of any problem with the login or loss of registration email is Ethan Kelly (available at ejk850@gmail.com). He has already provided a super user account to the email address mail@benedikt-sondermann.de.
 
@@ -424,7 +426,7 @@ Through the public section, a user can perform the following actions:
 \item To view information about idea owners, the user must press the button “Idea Owners”.
 \item Likewise, users can see information about idea sponsors by pressing the button “Idea Sponsors”.
 \item The privacy policy of PitchApp is accessible by clicking on the corresponding button.
-\item To login, the user can click on the “Login” button. The same thing happens when the user clicks on the button “My Pitches” as well.
+\item To login, the user can click on the “Login” button.
 
 \end{itemize}
 
@@ -455,7 +457,7 @@ If the user wants to cancel the creation of the pitch, he/she can press the butt
 
 Once a pitch has been created, the owner of the pitch can view the information of the pitch by pressing the blue “Show More” button that appears inside the card of the pitch.
 
-The creator of a pitch may also delete it by pressing the red “Delete Pitch” button that also appears inside the pitch’s card.
+The creator of a pitch may also delete it by pressing the red “Delete Pitch” button that also appears inside the pitch’s card. To avoid not-intended deletions, the idea owner is asked again by the red button. Clicking on "Are you sure?" deletes the pitch from the system.
 
 Once a pitch has been matched by a sponsor, the owner of the pitch can see this information, along with the information of the sponsor who matched it (name and e-mail), as well as when the match occurred, inside the card of the pitch.
 
