@@ -67,6 +67,13 @@ const DELETE_PITCH = gql`
 `;
 
 export default class Pitch extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {delete: false};
+  }
+  
+  
   render() {
   return (
     <Card style={{ marginBottom: "40px", height: "400px", overflow: "auto" }}>
@@ -85,11 +92,12 @@ export default class Pitch extends Component {
           refetchQueries={() => {return [{query: PITCHES_QUERY}, {query: FILTER_QUERY, variables: {email: this.props.userEmail}}]}}>
                 {offerSponsorship => this.props.isManager && !this.props.pitch.is_matched ? <Col><Button onClick={offerSponsorship} color='success' size="sm">Offer Sponsorship</Button></Col> : <span />}
           </Mutation>
-
+          {this.state.delete === true ? 
           <Mutation mutation={DELETE_PITCH} variables={{ id: this.props.pitch.id}}
           refetchQueries={() => {return [{query: PITCHES_QUERY}, {query: FILTER_QUERY, variables: {email: this.props.userEmail}}]}}>
-                {deletePitch => this.props.userEmail === this.props.pitch.owner_email ? <Col><Button onClick={deletePitch} color='danger' size="sm">Delete Pitch</Button></Col> : <span />}
-          </Mutation>
+                {deletePitch => this.props.userEmail === this.props.pitch.owner_email ? <Col><Button onClick={deletePitch} color='danger' size="sm">Are you sure?</Button></Col> : <span />}
+          </Mutation>: this.props.userEmail === this.props.pitch.owner_email ? <Col><Button onClick={()=>{this.setState({delete: true})}} color='danger' size="sm">Delete Pitch</Button></Col>
+          : <span />}
 
         </Row>
       </CardBody>
